@@ -1,12 +1,5 @@
 package de.moviereview.domain.service;
 
-import de.moviereview.domain.model.Movie;
-import de.moviereview.domain.model.Review;
-import de.moviereview.domain.repository.MovieRepository;
-import de.moviereview.domain.repository.ReviewRepository;
-
-import java.util.List;
-
 public class ReviewService {
 /*
     private MovieRepository movieRepository;

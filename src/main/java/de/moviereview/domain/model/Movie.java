@@ -15,8 +15,8 @@ public class Movie {
 
     private String title;
     private String summary;
-    private String trailer; // Link to the trailer (z.b. Youtube URL)
-    private double overallRating; // Calculated based on reviews
+    private String trailer;
+    private double overallRating;
     private LocalDate publishingDate;
     private String genre;
     private Integer rank; // Optional field, can be used for leaderboard

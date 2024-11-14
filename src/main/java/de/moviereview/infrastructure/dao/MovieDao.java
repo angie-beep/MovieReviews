@@ -1,4 +1,4 @@
-package de.moviereview.domain.repository;
+package de.moviereview.infrastructure.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -6,8 +6,8 @@ import jakarta.persistence.Persistence;
 import de.moviereview.domain.model.Movie;
 
 import java.util.List;
-//Für Verbindug zu Datenbank... glaube ich
-public class MovieRepository {
+
+public class MovieDao {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager entityManager = emf.createEntityManager();
@@ -16,8 +16,6 @@ public class MovieRepository {
         return entityManager.createQuery("SELECT m FROM Movie m", Movie.class).getResultList();
     }
 
-    //jede DB-operation beginnt mit begin und endet mit commit
-    //Hier für neuen Movie in die DB saven
     public Movie save(Movie movie) {
         entityManager.getTransaction().begin();
         if (movie.getId() == null) {
@@ -28,7 +26,7 @@ public class MovieRepository {
         entityManager.getTransaction().commit();
         return movie;
     }
-    //zum löschen
+
     public void deleteById(Long id) {
         entityManager.getTransaction().begin();
         Movie movie = entityManager.find(Movie.class, id);
@@ -37,7 +35,7 @@ public class MovieRepository {
         }
         entityManager.getTransaction().commit();
     }
-    //aubrufen
+
     public Movie findById(Long id) {
         return entityManager.find(Movie.class, id);
     }
