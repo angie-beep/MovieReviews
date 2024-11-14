@@ -1,6 +1,6 @@
 package de.moviereview.application;
 
-import de.moviereview.infrastructure.TMDbService;
+import de.moviereview.domain.service.TMDbService;
 
 import java.util.Scanner;
 

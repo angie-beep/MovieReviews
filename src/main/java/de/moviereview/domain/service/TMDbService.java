@@ -1,5 +1,6 @@
-package de.moviereview.infrastructure;
+package de.moviereview.domain.service;
 
+import de.moviereview.domain.model.Movie;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -37,6 +38,26 @@ public class TMDbService {
         }
         return null;
     }
+
+    // Methode zum Parsen der JSON-Daten in ein Movie-Objekt
+    private Movie parseMovieFromJson(String jsonResponse) {
+        Movie movie = new Movie();
+        // Beispielhafte Parsing-Logik, um den Titel zu extrahieren
+        String titleKey = "\"title\":\"";
+        int titleStartIndex = jsonResponse.indexOf(titleKey) + titleKey.length();
+        int titleEndIndex = jsonResponse.indexOf("\"", titleStartIndex);
+        String title = jsonResponse.substring(titleStartIndex, titleEndIndex);
+        movie.setTitle(title);
+
+        // Standardwerte für Genre und andere Attribute (diese sollten ebenfalls geparst werden)
+        movie.setGenre("Unbekannt");
+
+        return movie;
+    }
+
+
+
+
 
     // Diese Methode holt die beliebtesten Filme und gibt die Informationen als String zurück
     public String fetchPopularMovies() {
