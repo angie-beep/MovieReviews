@@ -11,10 +11,6 @@ public class Leaderboard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    private List<Movie> top10Movies;
-
-    @Column
     private String genre;
 
     // Constructors
@@ -22,9 +18,8 @@ public class Leaderboard {
 
     }
 
-    public Leaderboard(String genre, List<Movie> top10Movies) {
+    public Leaderboard(String genre) {
         this.genre = genre;
-        this.top10Movies = top10Movies;
     }
 
     // Getters and setters
@@ -42,13 +37,5 @@ public class Leaderboard {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public List<Movie> getTop10Movies() {
-        return top10Movies;
-    }
-
-    public void setTop10MovieIds(List<Movie> top10Movies) {
-        this.top10Movies = top10Movies;
     }
 }

@@ -11,7 +11,6 @@ public class Director {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String name;
     private LocalDate birthday;
     private String heritage;

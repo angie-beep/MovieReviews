@@ -3,6 +3,7 @@ package de.moviereview.domain.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Movie {
@@ -11,35 +12,24 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String title;
-
     private String summary;
-
     private String trailer; // Link to the trailer (z.b. Youtube URL)
-
     private double overallRating; // Calculated based on reviews
-
     private LocalDate publishingDate;
-
     private String genre;
-
     private Integer rank; // Optional field, can be used for leaderboard
-
     private int length; // Movie length in minutes
-
     private String originalLanguage;
 
-    @ManyToMany
-    private List<Actor> actors;
+    @ManyToMany/*(mappedBy = "movies")*/
+    private Set<Actor> actors;
     @ManyToMany
     private List<Director> directors;
     @OneToMany
     private List<Review> reviews;
     @ManyToMany
     private List<Watchlist> watchlist;
-    @ManyToMany
-    private List<Leaderboard> leaderboard;
 
     public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
         this.title = title;
@@ -138,11 +128,11 @@ public class Movie {
         this.originalLanguage = originalLanguage;
     }
 
-    public List<Actor> getActors() {
+    public Set<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
 

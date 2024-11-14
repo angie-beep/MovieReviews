@@ -19,7 +19,15 @@ public class Actor {
     private String heritage;
 
     @ManyToMany
-    private List<Movie> movies;
+    /*
+    @JoinTable(
+        name = "actor_id",
+        joinColumns = @JoinColumn(name = "actor_id"),
+        inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
+    */
+    private Set<Movie> movies;
+
     @Transient
     private List<Movie> top3movies;
 
@@ -60,11 +68,11 @@ public class Actor {
         this.heritage = heritage;
     }
 
-    public List<Movie> getMovies() {
+    public Set<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
 
