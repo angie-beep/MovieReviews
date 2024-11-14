@@ -35,6 +35,10 @@ public class Movie {
     private List<Director> directors;
     @OneToMany
     private List<Review> reviews;
+    @ManyToMany
+    private List<Watchlist> watchlist;
+    @ManyToMany
+    private List<Leaderboard> leaderboard;
 
     public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
         this.title = title;
