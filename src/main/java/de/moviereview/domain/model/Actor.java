@@ -24,6 +24,7 @@ public class Actor {
     public Actor() {
 
     }
+
     //getters and setters
     public Long getId() {
         return id;
