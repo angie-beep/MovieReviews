@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+//@Table(name = "movies")
 public class Movie {
 
     @Id
@@ -24,11 +25,11 @@ public class Movie {
 
     @ManyToMany/*(mappedBy = "movies")*/
     private Set<Actor> actors;
-    @ManyToMany
+    @ManyToMany/*(mappedBy = "movies")*/
     private List<Director> directors;
-    @OneToMany
+    @OneToMany/*(mappedBy = "movies")*/
     private List<Review> reviews;
-    @ManyToMany
+    @ManyToMany/*(mappedBy = "movies")*/
     private List<Watchlist> watchlist;
 
     public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {

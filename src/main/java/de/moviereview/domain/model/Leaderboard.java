@@ -1,10 +1,9 @@
 package de.moviereview.domain.model;
 
 import jakarta.persistence.*;
-import java.util.List;
-import java.util.ArrayList;
 
 @Entity
+//@Table(name = "leaderboards")
 public class Leaderboard {
 
     @Id

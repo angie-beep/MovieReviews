@@ -4,21 +4,22 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+//@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String username;
     private String email;
     private boolean notificationsEnabled;
 
     @OneToOne
+    //@JoinColumn(name = "watchlist_id")
     private Watchlist watchlist;
 
-    @OneToMany
+    @OneToMany/*(mappedBy = "users")*/
     private List<Review> reviews;
 
     public User(String username, String email, boolean notificationsEnabled){

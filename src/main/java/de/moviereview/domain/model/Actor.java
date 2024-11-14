@@ -1,13 +1,14 @@
 package de.moviereview.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import jakarta.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 
 @Entity
+//@Table(name = "actors")
 public class Actor {
 
     @Id
@@ -21,15 +22,12 @@ public class Actor {
     @ManyToMany
     /*
     @JoinTable(
-        name = "actor_id",
+        name = "actor_movie",
         joinColumns = @JoinColumn(name = "actor_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     */
     private Set<Movie> movies;
-
-    @Transient
-    private List<Movie> top3movies;
 
     public Actor() {
 
@@ -76,12 +74,8 @@ public class Actor {
         this.movies = movies;
     }
 
-    public List<Movie> getTop3movies() {
-        return top3movies;
+    public List<Movie> getTop3Movies() {
+        // Placeholder: Returning an empty list for now
+        return new ArrayList<>();
     }
-
-    public void setTop3movies(List<Movie> top3movies) {
-        this.top3movies = top3movies;
-    }
-
 }
