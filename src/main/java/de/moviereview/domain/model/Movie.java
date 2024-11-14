@@ -11,7 +11,7 @@ public class Movie {
     private Long id;
 
     @Column
-    private String name;
+    private String title;
 
     private String summary;
 
@@ -36,8 +36,8 @@ public class Movie {
     @OneToMany
     private List<Review> reviews;
 
-    public Movie(String name, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
-        this.name = name;
+    public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
+        this.title = title;
         this.summary = summary;
         this.trailer = trailer;
         this.publishingDate = publishingDate;
@@ -61,12 +61,12 @@ public class Movie {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSummary() {
