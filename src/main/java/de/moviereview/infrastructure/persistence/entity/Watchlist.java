@@ -27,7 +27,7 @@ public class Watchlist {
     */
     private List<Movie> movies;
 
-    public Watchlist(boolean isPublic, User user, List<Movie> movies){
+    public Watchlist(boolean isPublic, User user, Set<Movie> movies){
         this.isPublic = isPublic;
         this.user = user;
         this.movies = movies;
@@ -60,11 +60,11 @@ public class Watchlist {
         this.user = user;
     }
 
-    public List<Movie> getMovies() {
+    public Set<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
 }

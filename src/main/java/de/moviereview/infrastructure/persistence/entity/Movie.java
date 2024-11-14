@@ -137,11 +137,11 @@ public class Movie {
         this.actors = actors;
     }
 
-    public List<Director> getDirector() {
+    public Set<Director> getDirector() {
         return directors;
     }
 
-    public void setDirector(List<Director> directors) {
+    public void setDirectors (Set<Director> directors) {
         this.directors = directors;
     }
 
