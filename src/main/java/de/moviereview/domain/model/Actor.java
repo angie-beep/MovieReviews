@@ -25,7 +25,6 @@ public class Actor {
 
     }
 
-    private String hallo;
 
     //getters and setters
     public Long getId() {
