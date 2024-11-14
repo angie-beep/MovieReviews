@@ -1,6 +1,6 @@
 package de.moviereview.domain.service;
 
-import de.moviereview.domain.model.Movie;
+import de.moviereview.infrastructure.persistence.entity.Movie;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;

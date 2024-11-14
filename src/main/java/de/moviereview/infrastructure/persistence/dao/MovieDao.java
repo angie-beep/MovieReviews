@@ -1,9 +1,9 @@
-package de.moviereview.infrastructure.dao;
+package de.moviereview.infrastructure.persistence.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import de.moviereview.domain.model.Movie;
+import de.moviereview.infrastructure.persistence.entity.Movie;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package de.moviereview.domain.model;
+package de.moviereview.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -19,8 +19,8 @@ public class Movie {
     private double overallRating;
     private LocalDate publishingDate;
     private String genre;
-    private Integer rank; // Optional field, can be used for leaderboard
-    private int length; // Movie length in minutes
+    private Integer rank;
+    private int length;
     private String originalLanguage;
 
     @ManyToMany/*(mappedBy = "movies")*/
@@ -40,7 +40,7 @@ public class Movie {
         this.genre = genre;
         this.length = length;
         this.originalLanguage = originalLanguage;
-        this.overallRating = 0.0; // Set default rating
+        this.overallRating = 0.0; //default
     }
 
     public Movie() {

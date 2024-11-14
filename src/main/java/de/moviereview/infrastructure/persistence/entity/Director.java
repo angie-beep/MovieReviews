@@ -1,4 +1,4 @@
-package de.moviereview.domain.model;
+package de.moviereview.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
