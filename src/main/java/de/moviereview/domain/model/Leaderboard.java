@@ -1,21 +1,21 @@
-
 package de.moviereview.domain.model;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
 @Entity
 public class Leaderboard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String genre;
-
     @ManyToMany
     private List<Movie> top10Movies;
+
+    @Column
+    private String genre;
 
     // Constructors
     public Leaderboard() {

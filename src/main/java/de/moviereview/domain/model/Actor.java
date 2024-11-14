@@ -1,4 +1,5 @@
 package de.moviereview.domain.model;
+
 import java.util.List;
 import java.time.LocalDate;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Entity
 public class Actor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
