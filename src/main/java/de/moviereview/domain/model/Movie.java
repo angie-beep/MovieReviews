@@ -22,13 +22,13 @@ public class Movie {
     private int length; // Movie length in minutes
     private String originalLanguage;
 
-    @ManyToMany/*(mappedBy = "movies")*/
+    @ManyToMany(mappedBy = "movies")
     private Set<Actor> actors;
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private List<Director> directors;
-    @OneToMany
+    @OneToMany(mappedBy = "movies")
     private List<Review> reviews;
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private List<Watchlist> watchlist;
 
     public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {

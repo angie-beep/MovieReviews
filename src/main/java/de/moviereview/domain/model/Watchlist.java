@@ -12,13 +12,18 @@ public class Watchlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private boolean isPublic;
 
     @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany
+    @JoinTable(
+        name = "watchlist_movie",
+        joinColumns = @JoinColumn(name = "watchlist_id"),
+        inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
     private List<Movie> movies;
 
     public Watchlist(boolean isPublic, User user, List<Movie> movies){

@@ -12,14 +12,13 @@ public class Review {
     private Long id;
 
     @ManyToOne
-    //@JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    //@JoinColumn(name = "movie_id", nullable = false)
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-    @Column
     private int starRating;
     private String comment;
     private LocalDateTime createdAt;

@@ -2,6 +2,7 @@ package de.moviereview.domain.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,16 +17,18 @@ public class Director {
     private String heritage;
 
     @ManyToMany
+    @JoinTable(
+        name = "director_movie",
+        joinColumns = @JoinColumn(name = "director_id"),
+        inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
     private List<Movie> movies;
-    @Transient
-    private List<Movie> top3movies;
 
-    public Director(String name, LocalDate birthday, String heritage, List<Movie> movies, List<Movie> top3movies) {
+    public Director(String name, LocalDate birthday, String heritage, List<Movie> movies) {
         this.name = name;
         this.birthday = birthday;
         this.heritage = heritage;
         this.movies = movies;
-        this.top3movies = top3movies;
     }
 
     public Director() {
@@ -72,11 +75,8 @@ public class Director {
         this.movies = movies;
     }
 
-    public List<Movie> getTop3movies() {
-        return top3movies;
-    }
-
-    public void setTop3movies(List<Movie> top3movies) {
-        this.top3movies = top3movies;
+    public List<Movie> getTop3Movies() {
+        // Placeholder: Returning an empty list for now
+        return new ArrayList<>();
     }
 }
