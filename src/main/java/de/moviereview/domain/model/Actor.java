@@ -9,7 +9,8 @@ import java.util.Set;
 public class Actor {
 
     public Long id;
-    private String name;
+    private String lastname;
+    private String firstname;
     private LocalDate birthday;
     private String heritage;
     private Set<Movie> movies;
@@ -27,12 +28,20 @@ public class Actor {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String name) {
+        this.lastname = lastname;
+    }
+
+    public String getFirstName() {
+        return firstname;
+    }
+
+    public void setFirstName(String firstname) {
+        this.firstname = firstname;
     }
 
     public LocalDate getBirthday() {
