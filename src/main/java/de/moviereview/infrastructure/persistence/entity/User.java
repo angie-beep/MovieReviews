@@ -1,7 +1,7 @@
 package de.moviereview.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 //@Table(name = "users")
@@ -20,7 +20,7 @@ public class User {
     private Watchlist watchlist;
 
     @OneToMany/*(mappedBy = "users")*/
-    private List<Review> reviews;
+    private Set<Review> reviews;
 
     public User(String username, String email, boolean notificationsEnabled){
         this.username = username;
@@ -72,11 +72,11 @@ public class User {
         this.watchlist = watchlist;
     }
 
-    public List<Review> getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 }

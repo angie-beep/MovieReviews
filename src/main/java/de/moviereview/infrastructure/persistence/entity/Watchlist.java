@@ -1,7 +1,7 @@
 package de.moviereview.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 //@Table(name = "watchlists")
@@ -25,7 +25,7 @@ public class Watchlist {
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     */
-    private List<Movie> movies;
+    private Set<Movie> movies;
 
     public Watchlist(boolean isPublic, User user, Set<Movie> movies){
         this.isPublic = isPublic;

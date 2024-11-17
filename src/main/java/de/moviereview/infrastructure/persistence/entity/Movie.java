@@ -26,11 +26,11 @@ public class Movie {
     @ManyToMany/*(mappedBy = "movies")*/
     private Set<Actor> actors;
     @ManyToMany/*(mappedBy = "movies")*/
-    private List<Director> directors;
+    private Set<Director> directors;
     @OneToMany/*(mappedBy = "movies")*/
-    private List<Review> reviews;
+    private Set<Review> reviews;
     @ManyToMany/*(mappedBy = "movies")*/
-    private List<Watchlist> watchlist;
+    private Set<Watchlist> watchlist;
 
     public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
         this.title = title;
@@ -145,12 +145,20 @@ public class Movie {
         this.directors = directors;
     }
 
-    public List<Review> getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Set<Watchlist> getWatchlist() {
+        return watchlist;
+    }
+
+    public void setWatchlist(Set<Watchlist> watchlist) {
+        this.watchlist = watchlist;
     }
 }
 
