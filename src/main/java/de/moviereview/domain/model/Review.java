@@ -1,14 +1,14 @@
 package de.moviereview.domain.model;
 
-import de.moviereview.infrastructure.persistence.entity.Movie;
-import de.moviereview.infrastructure.persistence.entity.User;
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
+import de.moviereview.infrastructure.persistence.entity.UserEntity;
 import java.time.LocalDateTime;
 
 public class Review {
 
     private Long id;
-    private User user;
-    private Movie movie;
+    private UserEntity user;
+    private MovieEntity movie;
     private int starRating;
     private String comment;
     private LocalDateTime createdAt;
@@ -20,7 +20,7 @@ public class Review {
 
     }
 
-    public Review(User user, Movie movie, int starRating, String comment) {
+    public Review(UserEntity user, MovieEntity movie, int starRating, String comment) {
         this.user = user;
         this.movie = movie;
         this.starRating = starRating;
@@ -37,19 +37,19 @@ public class Review {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
-    public Movie getMovie() {
+    public MovieEntity getMovie() {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
+    public void setMovie(MovieEntity movie) {
         this.movie = movie;
     }
 

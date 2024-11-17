@@ -5,19 +5,19 @@ import java.time.LocalDateTime;
 
 @Entity
 //@Table(name = "reviews")
-public class Review {
+public class ReviewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name = "movie_id", nullable = false)
-    private Movie movie;
+    private MovieEntity movie;
 
     private int starRating;
     private String comment;
@@ -26,10 +26,10 @@ public class Review {
 
     // Constructors, getters, and setters
 
-    public Review() {
+    public ReviewEntity() {
     }
 
-    public Review(User user, Movie movie, int starRating, String comment) {
+    public ReviewEntity(UserEntity user, MovieEntity movie, int starRating, String comment) {
         this.user = user;
         this.movie = movie;
         this.starRating = starRating;
@@ -46,19 +46,19 @@ public class Review {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
-    public Movie getMovie() {
+    public MovieEntity getMovie() {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
+    public void setMovie(MovieEntity movie) {
         this.movie = movie;
     }
 

@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 //@Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,20 +15,20 @@ public class User {
     private String email;
     private boolean notificationsEnabled;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name = "watchlist_id")
-    private Watchlist watchlist;
+    private WatchlistEntity watchlist;
 
-    @OneToMany/*(mappedBy = "users")*/
-    private Set<Review> reviews;
+    @OneToMany(cascade = CascadeType.ALL)/*(mappedBy = "users")*/
+    private Set<ReviewEntity> reviews;
 
-    public User(String username, String email, boolean notificationsEnabled){
+    public UserEntity(String username, String email, boolean notificationsEnabled){
         this.username = username;
         this.email = email;
         this.notificationsEnabled = notificationsEnabled;
     }
 
-    public User() {
+    public UserEntity() {
 
     }
 
@@ -64,19 +64,19 @@ public class User {
         this.notificationsEnabled = notificationsEnabled;
     }
 
-    public Watchlist getWatchlist() {
+    public WatchlistEntity getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(Watchlist watchlist) {
+    public void setWatchlist(WatchlistEntity watchlist) {
         this.watchlist = watchlist;
     }
 
-    public Set<Review> getReviews() {
+    public Set<ReviewEntity> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<Review> reviews) {
+    public void setReviews(Set<ReviewEntity> reviews) {
         this.reviews = reviews;
     }
 }

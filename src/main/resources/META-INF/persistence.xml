@@ -9,13 +9,13 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
-        <class>de.moviereview.infrastructure.persistence.entity.Actor</class>
-        <class>de.moviereview.infrastructure.persistence.entity.Director</class>
-        <class>de.moviereview.infrastructure.persistence.entity.Leaderboard</class>
-        <class>de.moviereview.infrastructure.persistence.entity.Movie</class>
-        <class>de.moviereview.infrastructure.persistence.entity.Review</class>
-        <class>de.moviereview.infrastructure.persistence.entity.User</class>
-        <class>de.moviereview.infrastructure.persistence.entity.Watchlist</class>
+        <class>de.moviereview.infrastructure.persistence.entity.ActorEntity</class>
+        <class>de.moviereview.infrastructure.persistence.entity.DirectorEntity</class>
+        <class>de.moviereview.infrastructure.persistence.entity.LeaderboardEntity</class>
+        <class>de.moviereview.infrastructure.persistence.entity.MovieEntity</class>
+        <class>de.moviereview.infrastructure.persistence.entity.ReviewEntity</class>
+        <class>de.moviereview.infrastructure.persistence.entity.UserEntity</class>
+        <class>de.moviereview.infrastructure.persistence.entity.WatchlistEntity</class>
 
 
         <properties>

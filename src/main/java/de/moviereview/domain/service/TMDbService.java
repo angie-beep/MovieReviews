@@ -1,6 +1,6 @@
 package de.moviereview.domain.service;
 
-import de.moviereview.infrastructure.persistence.entity.Movie;
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -40,8 +40,8 @@ public class TMDbService {
     }
 
     // Methode zum Parsen der JSON-Daten in ein Movie-Objekt
-    private Movie parseMovieFromJson(String jsonResponse) {
-        Movie movie = new Movie();
+    private MovieEntity parseMovieFromJson(String jsonResponse) {
+        MovieEntity movie = new MovieEntity();
         // Beispielhafte Parsing-Logik, um den Titel zu extrahieren
         String titleKey = "\"title\":\"";
         int titleStartIndex = jsonResponse.indexOf(titleKey) + titleKey.length();

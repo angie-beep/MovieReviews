@@ -1,6 +1,6 @@
 package de.moviereview.domain.model;
 
-import de.moviereview.infrastructure.persistence.entity.Movie;
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ public class Director {
     private String firstname;
     private LocalDate birthday;
     private String heritage;
-    private Set<Movie> movies;
+    private Set<MovieEntity> movies;
 
-    public Director(String lastname, String firstname, LocalDate birthday, String heritage, Set<Movie> movies) {
+    public Director(String lastname, String firstname, LocalDate birthday, String heritage, Set<MovieEntity> movies) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.birthday = birthday;
@@ -67,15 +67,15 @@ public class Director {
         this.heritage = heritage;
     }
 
-    public Set<Movie> getMovies() {
+    public Set<MovieEntity> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(Set<MovieEntity> movies) {
         this.movies = movies;
     }
 
-    public List<Movie> getTop3Movies() {
+    public List<MovieEntity> getTop3Movies() {
         // Placeholder: Returning an empty list for now
         return new ArrayList<>();
     }

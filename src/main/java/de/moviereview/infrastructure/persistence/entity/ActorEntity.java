@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 //@Table(name = "actors")
-public class Actor {
+public class ActorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Actor {
     private LocalDate birthday;
     private String heritage;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     /*
     @JoinTable(
         name = "actor_movie",
@@ -28,9 +28,9 @@ public class Actor {
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     */
-    private Set<Movie> movies;
+    private Set<MovieEntity> movies;
 
-    public Actor() {
+    public ActorEntity() {
 
     }
 
@@ -75,15 +75,15 @@ public class Actor {
         this.heritage = heritage;
     }
 
-    public Set<Movie> getMovies() {
+    public Set<MovieEntity> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(Set<MovieEntity> movies) {
         this.movies = movies;
     }
 
-    public List<Movie> getTop3Movies() {
+    public List<MovieEntity> getTop3Movies() {
         // Placeholder: Returning an empty list for now
         return new ArrayList<>();
     }

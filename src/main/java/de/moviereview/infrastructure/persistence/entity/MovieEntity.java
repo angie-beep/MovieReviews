@@ -2,12 +2,11 @@ package de.moviereview.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 //@Table(name = "movies")
-public class Movie {
+public class MovieEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +22,16 @@ public class Movie {
     private int length;
     private String originalLanguage;
 
-    @ManyToMany/*(mappedBy = "movies")*/
-    private Set<Actor> actors;
-    @ManyToMany/*(mappedBy = "movies")*/
-    private Set<Director> directors;
-    @OneToMany/*(mappedBy = "movies")*/
-    private Set<Review> reviews;
-    @ManyToMany/*(mappedBy = "movies")*/
-    private Set<Watchlist> watchlist;
+    @ManyToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    private Set<ActorEntity> actors;
+    @ManyToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    private Set<DirectorEntity> directors;
+    @OneToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    private Set<ReviewEntity> reviews;
+    @ManyToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    private Set<WatchlistEntity> watchlist;
 
-    public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
+    public MovieEntity(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
         this.title = title;
         this.summary = summary;
         this.trailer = trailer;
@@ -43,7 +42,7 @@ public class Movie {
         this.overallRating = 0.0; //default
     }
 
-    public Movie() {
+    public MovieEntity() {
 
     }
 
@@ -129,35 +128,35 @@ public class Movie {
         this.originalLanguage = originalLanguage;
     }
 
-    public Set<Actor> getActors() {
+    public Set<ActorEntity> getActors() {
         return actors;
     }
 
-    public void setActors(Set<Actor> actors) {
+    public void setActors(Set<ActorEntity> actors) {
         this.actors = actors;
     }
 
-    public Set<Director> getDirector() {
+    public Set<DirectorEntity> getDirector() {
         return directors;
     }
 
-    public void setDirectors (Set<Director> directors) {
+    public void setDirectors (Set<DirectorEntity> directors) {
         this.directors = directors;
     }
 
-    public Set<Review> getReviews() {
+    public Set<ReviewEntity> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<Review> reviews) {
+    public void setReviews(Set<ReviewEntity> reviews) {
         this.reviews = reviews;
     }
 
-    public Set<Watchlist> getWatchlist() {
+    public Set<WatchlistEntity> getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(Set<Watchlist> watchlist) {
+    public void setWatchlist(Set<WatchlistEntity> watchlist) {
         this.watchlist = watchlist;
     }
 }

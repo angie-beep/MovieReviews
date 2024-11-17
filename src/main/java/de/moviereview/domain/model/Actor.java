@@ -3,7 +3,7 @@ package de.moviereview.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import de.moviereview.infrastructure.persistence.entity.Movie;
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import java.util.Set;
 
 public class Actor {
@@ -13,7 +13,7 @@ public class Actor {
     private String firstname;
     private LocalDate birthday;
     private String heritage;
-    private Set<Movie> movies;
+    private Set<MovieEntity> movies;
 
     public Actor() {
 
@@ -60,15 +60,15 @@ public class Actor {
         this.heritage = heritage;
     }
 
-    public Set<Movie> getMovies() {
+    public Set<MovieEntity> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(Set<MovieEntity> movies) {
         this.movies = movies;
     }
 
-    public List<Movie> getTop3Movies() {
+    public List<MovieEntity> getTop3Movies() {
         // Placeholder: Returning an empty list for now
         return new ArrayList<>();
     }

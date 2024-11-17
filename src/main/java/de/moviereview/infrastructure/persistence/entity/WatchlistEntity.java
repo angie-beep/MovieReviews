@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 //@Table(name = "watchlists")
-public class Watchlist {
+public class WatchlistEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,11 +13,11 @@ public class Watchlist {
 
     private boolean isPublic;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     /*
     @JoinTable(
         name = "watchlist_movie",
@@ -25,15 +25,15 @@ public class Watchlist {
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     */
-    private Set<Movie> movies;
+    private Set<MovieEntity> movies;
 
-    public Watchlist(boolean isPublic, User user, Set<Movie> movies){
+    public WatchlistEntity(boolean isPublic, UserEntity user, Set<MovieEntity> movies){
         this.isPublic = isPublic;
         this.user = user;
         this.movies = movies;
     }
 
-    public Watchlist() {
+    public WatchlistEntity() {
     }
 
     public Long getId() {
@@ -52,19 +52,19 @@ public class Watchlist {
         isPublic = aPublic;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
-    public Set<Movie> getMovies() {
+    public Set<MovieEntity> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(Set<MovieEntity> movies) {
         this.movies = movies;
     }
 }

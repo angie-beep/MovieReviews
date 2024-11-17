@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 //@Table(name = "leaderboards")
-public class Leaderboard {
+public class LeaderboardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,11 +13,11 @@ public class Leaderboard {
     private String genre;
 
     // Constructors
-    public Leaderboard() {
+    public LeaderboardEntity() {
 
     }
 
-    public Leaderboard(String genre) {
+    public LeaderboardEntity(String genre) {
         this.genre = genre;
     }
 
