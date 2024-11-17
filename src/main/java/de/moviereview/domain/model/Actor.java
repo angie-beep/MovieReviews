@@ -1,44 +1,24 @@
-package de.moviereview.infrastructure.persistence.entity;
+package de.moviereview.domain.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import de.moviereview.infrastructure.persistence.entity.Movie;
 import java.util.Set;
 
-@Entity
-//@Table(name = "directors")
-public class Director {
+public class Actor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    public Long id;
     private String name;
     private LocalDate birthday;
     private String heritage;
-
-    @ManyToMany
-    /*
-    @JoinTable(
-        name = "director_movie",
-        joinColumns = @JoinColumn(name = "director_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
-    */
     private Set<Movie> movies;
 
-    public Director(String name, LocalDate birthday, String heritage, Set<Movie> movies) {
-        this.name = name;
-        this.birthday = birthday;
-        this.heritage = heritage;
-        this.movies = movies;
-    }
-
-    public Director() {
+    public Actor() {
 
     }
 
+    //getters and setters
     public Long getId() {
         return id;
     }
@@ -83,4 +63,4 @@ public class Director {
         // Placeholder: Returning an empty list for now
         return new ArrayList<>();
     }
-   }
+}

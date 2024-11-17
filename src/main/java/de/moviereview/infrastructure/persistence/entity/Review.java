@@ -19,7 +19,6 @@ public class Review {
     //@JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-    @Column
     private int starRating;
     private String comment;
     private LocalDateTime createdAt;

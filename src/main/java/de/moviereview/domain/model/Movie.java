@@ -1,18 +1,11 @@
-package de.moviereview.infrastructure.persistence.entity;
+package de.moviereview.domain.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
-@Entity
-//@Table(name = "movies")
 public class Movie {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String summary;
     private String trailer;
@@ -22,14 +15,9 @@ public class Movie {
     private Integer rank;
     private int length;
     private String originalLanguage;
-
-    @ManyToMany/*(mappedBy = "movies")*/
     private Set<Actor> actors;
-    @ManyToMany/*(mappedBy = "movies")*/
     private Set<Director> directors;
-    @OneToMany/*(mappedBy = "movies")*/
     private Set<Review> reviews;
-    @ManyToMany/*(mappedBy = "movies")*/
     private Set<Watchlist> watchlist;
 
     public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {

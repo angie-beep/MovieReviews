@@ -1,30 +1,12 @@
-package de.moviereview.infrastructure.persistence.entity;
+package de.moviereview.domain.model;
 
-import jakarta.persistence.*;
 import java.util.Set;
 
-@Entity
-//@Table(name = "watchlists")
 public class Watchlist {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private boolean isPublic;
-
-    @OneToOne
-    //@JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToMany
-    /*
-    @JoinTable(
-        name = "watchlist_movie",
-        joinColumns = @JoinColumn(name = "watchlist_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
-    */
     private Set<Movie> movies;
 
     public Watchlist(boolean isPublic, User user, Set<Movie> movies){
