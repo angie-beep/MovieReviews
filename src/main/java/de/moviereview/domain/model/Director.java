@@ -27,6 +27,15 @@ public class Director {
 
     }
 
+    public Director(Long id, String lastname, String firstname, LocalDate birthday, String heritage, Set<MovieEntity> movies) {
+        this.id = id;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.birthday = birthday;
+        this.heritage = heritage;
+        this.movies = movies;
+    }
+
     public Long getId() {
         return id;
     }

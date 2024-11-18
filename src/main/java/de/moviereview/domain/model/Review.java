@@ -28,6 +28,15 @@ public class Review {
         this.createdAt = LocalDateTime.now();
     }
 
+    public Review(Long id, UserEntity user, MovieEntity movie, int starRating, String comment, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.user = user;
+        this.movie = movie;
+        this.starRating = starRating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public Long getId() {
         return id;

@@ -21,6 +21,15 @@ public class User {
 
     }
 
+    public User(Long id, String username, String email, boolean notificationsEnabled, Watchlist watchlist, Set<Review> reviews) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.notificationsEnabled = notificationsEnabled;
+        this.watchlist = watchlist;
+        this.reviews = reviews;
+    }
+
     public Long getId() {
         return id;
     }

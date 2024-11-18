@@ -1,5 +1,7 @@
 package de.moviereview.domain.model;
 
+//The core domain model representing an actor in the application.
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
@@ -17,6 +19,15 @@ public class Actor {
 
     public Actor() {
 
+    }
+
+    public Actor(Long id, String lastname, String firstname, LocalDate birthday, String heritage, Set<MovieEntity> movies) {
+        this.id = id;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.birthday = birthday;
+        this.heritage = heritage;
+        this.movies = movies;
     }
 
     //getters and setters

@@ -18,6 +18,13 @@ public class Watchlist {
     public Watchlist() {
     }
 
+    public Watchlist(Long id, boolean isPublic, User user, Set<Movie> movies) {
+        this.id = id;
+        this.isPublic = isPublic;
+        this.user = user;
+        this.movies = movies;
+    }
+
     public Long getId() {
         return id;
     }

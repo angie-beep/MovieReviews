@@ -35,7 +35,24 @@ public class Movie {
 
     }
 
-    // Getters and Setters
+    public Movie(Long id, String title, String summary, String trailer, double overallRating, LocalDate publishingDate, String genre, Integer rank, int length, String originalLanguage, Set<Actor> actors, Set<Director> directors, Set<Review> reviews, Set<Watchlist> watchlist) {
+        this.id = id;
+        this.title = title;
+        this.summary = summary;
+        this.trailer = trailer;
+        this.overallRating = overallRating;
+        this.publishingDate = publishingDate;
+        this.genre = genre;
+        this.rank = rank;
+        this.length = length;
+        this.originalLanguage = originalLanguage;
+        this.actors = actors;
+        this.directors = directors;
+        this.reviews = reviews;
+        this.watchlist = watchlist;
+    }
+
+// Getters and Setters
 
     public Long getId() {
         return id;
