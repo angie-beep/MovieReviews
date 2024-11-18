@@ -1,5 +1,7 @@
 package de.moviereview.infrastructure.persistence.entity;
 
+//Represents the database structure for storing actor data.
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
