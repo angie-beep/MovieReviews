@@ -1,6 +1,5 @@
 package de.moviereview.domain.model;
 
-import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +12,9 @@ public class Director {
     private String firstname;
     private LocalDate birthday;
     private String heritage;
-    private Set<MovieEntity> movies;
+    private Set<Movie> movies;
 
-    public Director(String lastname, String firstname, LocalDate birthday, String heritage, Set<MovieEntity> movies) {
+    public Director(String lastname, String firstname, LocalDate birthday, String heritage, Set<Movie> movies) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.birthday = birthday;
@@ -27,7 +26,7 @@ public class Director {
 
     }
 
-    public Director(Long id, String lastname, String firstname, LocalDate birthday, String heritage, Set<MovieEntity> movies) {
+    public Director(Long id, String lastname, String firstname, LocalDate birthday, String heritage, Set<Movie> movies) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -48,7 +47,7 @@ public class Director {
         return lastname;
     }
 
-    public void setLastName(String name) {
+    public void setLastName(String lastname) {
         this.lastname = lastname;
     }
 
@@ -76,15 +75,15 @@ public class Director {
         this.heritage = heritage;
     }
 
-    public Set<MovieEntity> getMovies() {
+    public Set<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<MovieEntity> movies) {
+    public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
 
-    public List<MovieEntity> getTop3Movies() {
+    public List<Movie> getTop3Movies() {
         // Placeholder: Returning an empty list for now
         return new ArrayList<>();
     }

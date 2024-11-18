@@ -18,7 +18,7 @@ public class DirectorMapper {
                 entity.getFirstName(),
                 entity.getBirthday(),
                 entity.getHeritage(),
-                entity.getMovies().stream().map(MovieMapper::toEntity).collect(Collectors.toSet())
+                entity.getMovies().stream().map(MovieMapper::toModel).collect(Collectors.toSet())
         );
     }
 
