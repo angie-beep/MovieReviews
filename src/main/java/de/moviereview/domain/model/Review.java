@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 public class Review {
 
     private Long id;
-    private UserEntity user;
-    private MovieEntity movie;
+    private User user;
+    private Movie movie;
     private int starRating;
     private String comment;
     private LocalDateTime createdAt;
@@ -20,7 +20,7 @@ public class Review {
 
     }
 
-    public Review(UserEntity user, MovieEntity movie, int starRating, String comment) {
+    public Review(User user, Movie movie, int starRating, String comment) {
         this.user = user;
         this.movie = movie;
         this.starRating = starRating;
@@ -28,7 +28,7 @@ public class Review {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Review(Long id, UserEntity user, MovieEntity movie, int starRating, String comment, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Review(Long id, User user, Movie movie, int starRating, String comment, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.user = user;
         this.movie = movie;
@@ -46,19 +46,19 @@ public class Review {
         this.id = id;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public MovieEntity getMovie() {
+    public Movie getMovie() {
         return movie;
     }
 
-    public void setMovie(MovieEntity movie) {
+    public void setMovie(Movie movie) {
         this.movie = movie;
     }
 
