@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class WatchlistDaoImpl {
+public class WatchlistDaoImpl implements WatchlistDao{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager em = emf.createEntityManager();
 
@@ -19,6 +19,14 @@ public class WatchlistDaoImpl {
         }
         em.getTransaction().commit();
         return watchlist;
+    }
+
+    public void updatePublic(){
+
+    }
+
+    public void addMovie(MovieEntity movie){
+
     }
 
     public void delete(Long id) {

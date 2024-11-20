@@ -12,6 +12,4 @@ public interface ReviewDao {
     void update(ReviewEntity reviewEntity);
 
     void delete(long reviewId);
-
-
 }

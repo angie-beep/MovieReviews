@@ -1,19 +1,19 @@
 package de.moviereview.infrastructure.persistence.dao;
 
+import de.moviereview.infrastructure.persistence.entity.ActorEntity;
 import de.moviereview.infrastructure.persistence.entity.DirectorEntity;
 
 import java.util.List;
 
 public interface DirectorDao {
-    void create(DirectorEntity directorEntity);
+    void create( DirectorEntity directorEntity );
 
-    DirectorEntity read(long direcorId);
+    DirectorEntity read( long directorId );
 
-    void update(DirectorEntity directorEntity);
+    void updateFirstname(String firstname);
+    void updateLastname(String lastname);
 
-    void delete(long directorId);
-
-
+    void delete( long directorId );
 }
 
 

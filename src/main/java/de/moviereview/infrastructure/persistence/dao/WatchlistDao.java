@@ -5,13 +5,11 @@ import de.moviereview.infrastructure.persistence.entity.WatchlistEntity;
 import java.util.List;
 
 public interface WatchlistDao {
-    void create(WatchlistEntity watchlistEntity);
-
     WatchlistEntity read(long watchlistId);
 
-    void update(WatchlistEntity watchlistEntity);
+    void updatePublic();
+    void addMovie(MovieEntity movie);
 
-    void delete(long watchlistId);
-
-
+    void deleteMovie(long watchlistId);
+    void clearWatchlist(long watchlistId);
 }
