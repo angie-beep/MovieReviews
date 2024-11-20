@@ -3,7 +3,6 @@ package de.moviereview.infrastructure.api.mapper;
 //handles conversions between Actor, ActorEntity and ActorDTO
 
 import de.moviereview.domain.model.Actor;
-import de.moviereview.domain.model.Movie;
 import de.moviereview.infrastructure.api.dto.ActorDTO;
 import de.moviereview.infrastructure.persistence.entity.ActorEntity;
 

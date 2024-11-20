@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-//@Table(name = "watchlists")
+@Table(name = "watchlists")
 public class WatchlistEntity {
 
     @Id
