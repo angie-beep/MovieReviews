@@ -20,7 +20,6 @@ public class MovieMapper {
                 entity.getOverallRating(),
                 entity.getPublishingDate(),
                 entity.getGenre(),
-                entity.getRank(),
                 entity.getLength(),
                 entity.getOriginalLanguage(),
                 entity.getActors().stream().map(ActorMapper::toModel).collect(Collectors.toSet()),
@@ -42,7 +41,6 @@ public class MovieMapper {
         entity.setOverallRating(model.getOverallRating());
         entity.setPublishingDate(model.getPublishingDate());
         entity.setGenre(model.getGenre());
-        entity.setRank(model.getRank());
         entity.setLength(model.getLength());
         entity.setOriginalLanguage(model.getOriginalLanguage());
         entity.setActors(model.getActors().stream().map(ActorMapper::toEntity).collect(Collectors.toSet()));
@@ -64,7 +62,6 @@ public class MovieMapper {
         dto.setOverallRating(model.getOverallRating());
         dto.setPublishingDate(model.getPublishingDate());
         dto.setGenre(model.getGenre());
-        dto.setRank(model.getRank());
         dto.setLength(model.getLength());
         dto.setOriginalLanguage(model.getOriginalLanguage());
         dto.setActorIds(model.getActors().stream().map(Actor::getId).collect(Collectors.toSet()));
@@ -86,7 +83,6 @@ public class MovieMapper {
                 dto.getOverallRating(),
                 dto.getPublishingDate(),
                 dto.getGenre(),
-                dto.getRank(),
                 dto.getLength(),
                 dto.getOriginalLanguage(),
                 null, // Mapping actor IDs to Actors should be handled separately

@@ -13,13 +13,15 @@ public class UserEntity {
 
     private String username;
     private String email;
+
+    @Column(name = "notifications_enabled")
     private boolean notificationsEnabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "watchlist_id")
+    @OneToOne
+    @JoinColumn(name = "watchlist_id")
     private WatchlistEntity watchlist;
 
-    @OneToMany(cascade = CascadeType.ALL)/*(mappedBy = "users")*/
+    @OneToMany(mappedBy = "users")
     private Set<ReviewEntity> reviews;
 
     public UserEntity(String username, String email, boolean notificationsEnabled){

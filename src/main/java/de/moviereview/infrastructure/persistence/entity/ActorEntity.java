@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 @Entity
-//@Table(name = "actors")
+@Table(name = "actors")
 public class ActorEntity {
 
     @Id
@@ -23,13 +23,11 @@ public class ActorEntity {
     private String heritage;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    /*
     @JoinTable(
         name = "actor_movie",
         joinColumns = @JoinColumn(name = "actor_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    */
     private Set<MovieEntity> movies;
 
     public ActorEntity() {

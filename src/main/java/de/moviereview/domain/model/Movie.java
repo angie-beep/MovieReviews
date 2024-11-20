@@ -12,7 +12,6 @@ public class Movie {
     private double overallRating;
     private LocalDate publishingDate;
     private String genre;
-    private Integer rank;
     private int length;
     private String originalLanguage;
     private Set<Actor> actors;
@@ -35,7 +34,7 @@ public class Movie {
 
     }
 
-    public Movie(Long id, String title, String summary, String trailer, double overallRating, LocalDate publishingDate, String genre, Integer rank, int length, String originalLanguage, Set<Actor> actors, Set<Director> directors, Set<Review> reviews, Set<Watchlist> watchlist) {
+    public Movie(Long id, String title, String summary, String trailer, double overallRating, LocalDate publishingDate, String genre, int length, String originalLanguage, Set<Actor> actors, Set<Director> directors, Set<Review> reviews, Set<Watchlist> watchlist) {
         this.id = id;
         this.title = title;
         this.summary = summary;
@@ -43,7 +42,6 @@ public class Movie {
         this.overallRating = overallRating;
         this.publishingDate = publishingDate;
         this.genre = genre;
-        this.rank = rank;
         this.length = length;
         this.originalLanguage = originalLanguage;
         this.actors = actors;
@@ -108,14 +106,6 @@ public class Movie {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public Integer getRank() {
-        return rank;
-    }
-
-    public void setRank(Integer rank) {
-        this.rank = rank;
     }
 
     public int getLength() {

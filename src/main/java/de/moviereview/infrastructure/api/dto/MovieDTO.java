@@ -11,7 +11,6 @@ public class MovieDTO {
     private double overallRating;
     private LocalDate publishingDate;
     private String genre;
-    private Integer rank;
     private int length;
     private String originalLanguage;
     private Set<Long> actorIds;
@@ -74,14 +73,6 @@ public class MovieDTO {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public Integer getRank() {
-        return rank;
-    }
-
-    public void setRank(Integer rank) {
-        this.rank = rank;
     }
 
     public int getLength() {

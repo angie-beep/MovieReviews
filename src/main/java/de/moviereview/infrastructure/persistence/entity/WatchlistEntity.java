@@ -11,20 +11,19 @@ public class WatchlistEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "is_public")
     private boolean isPublic;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    /*
     @JoinTable(
         name = "watchlist_movie",
         joinColumns = @JoinColumn(name = "watchlist_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    */
     private Set<MovieEntity> movies;
 
     public WatchlistEntity(boolean isPublic, UserEntity user, Set<MovieEntity> movies){

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-//@Table(name = "directors")
+@Table(name = "directors")
 public class DirectorEntity {
 
     @Id
@@ -20,13 +20,11 @@ public class DirectorEntity {
     private String heritage;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    /*
     @JoinTable(
         name = "director_movie",
         joinColumns = @JoinColumn(name = "director_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    */
     private Set<MovieEntity> movies;
 
     public DirectorEntity(String lastname, String firstname, LocalDate birthday, String heritage, Set<MovieEntity> movies) {

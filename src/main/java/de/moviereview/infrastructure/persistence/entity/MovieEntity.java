@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-//@Table(name = "movies")
+@Table(name = "movies")
 public class MovieEntity {
 
     @Id
@@ -15,20 +15,26 @@ public class MovieEntity {
     private String title;
     private String summary;
     private String trailer;
+
+    @Column(name = "overall_rating")
     private double overallRating;
+
+    @Column(name = "publishing_date")
     private LocalDate publishingDate;
+
     private String genre;
-    private Integer rank;
     private int length;
+
+    @Column(name = "original_language")
     private String originalLanguage;
 
-    @ManyToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    @ManyToMany(mappedBy = "movies")
     private Set<ActorEntity> actors;
-    @ManyToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    @ManyToMany(mappedBy = "movies")
     private Set<DirectorEntity> directors;
-    @OneToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    @OneToMany(mappedBy = "movies")
     private Set<ReviewEntity> reviews;
-    @ManyToMany(cascade = CascadeType.ALL)/*(mappedBy = "movies")*/
+    @ManyToMany(mappedBy = "movies")
     private Set<WatchlistEntity> watchlist;
 
     public MovieEntity(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
@@ -102,14 +108,6 @@ public class MovieEntity {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public Integer getRank() {
-        return rank;
-    }
-
-    public void setRank(Integer rank) {
-        this.rank = rank;
     }
 
     public int getLength() {
