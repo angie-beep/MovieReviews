@@ -5,13 +5,13 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 
-public class MovieDaoImpl {
+public class MovieDaoImpl implements MovieDao{
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager em = emf.createEntityManager();
 
-
-    public MovieEntity create(MovieEntity movie) {
+    @Override
+    public void create(MovieEntity movie) {
         em.getTransaction().begin();
         if (movie.getId() == null) {
             em.persist(movie);
@@ -19,10 +19,10 @@ public class MovieDaoImpl {
             movie = em.merge(movie);
         }
         em.getTransaction().commit();
-        return movie;
-    }
 
-    public void delete(Long id) {
+    }
+    @Override
+    public void delete(long id) {
         em.getTransaction().begin();
         MovieEntity movie = em.find(MovieEntity.class, id);
         if (movie != null) {
@@ -30,12 +30,15 @@ public class MovieDaoImpl {
         }
         em.getTransaction().commit();
     }
-
-    public MovieEntity read(Long id) {
+    @Override
+    public MovieEntity read(long id) {
         final MovieEntity result = em.find(MovieEntity.class, id);
         return result;
     }
+    @Override
+    public void update (MovieEntity movieEntity){
 
+    }
     public void close() {
         em.close();
         emf.close();

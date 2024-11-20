@@ -5,12 +5,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class UserDaoImpl {
+public class UserDaoImpl implements UserDao{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager em = emf.createEntityManager();
 
 
-    public UserEntity create(UserEntity user) {
+    public void create(UserEntity user) {
         em.getTransaction().begin();
         if (user.getId() == null) {
             em.persist(user);
@@ -18,10 +18,9 @@ public class UserDaoImpl {
             user = em.merge(user);
         }
         em.getTransaction().commit();
-        return user;
     }
 
-    public void delete(Long id) {
+    public void delete(long id) {
         em.getTransaction().begin();
         UserEntity user = em.find(UserEntity.class, id);
         if (user != null) {
@@ -30,10 +29,18 @@ public class UserDaoImpl {
         em.getTransaction().commit();
     }
 
-    public UserEntity read(Long id) {
+    public UserEntity read(long id) {
         final UserEntity result = em.find(UserEntity.class, id);
         return result;
     }
+
+    public void update(UserEntity userEntity){
+
+    }
+
+   // public void updateUsername(String name);
+   // public void updateEmail(String email);
+    //public void updateNotificaations();
 
     public void close() {
         em.close();
