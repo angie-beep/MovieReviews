@@ -9,7 +9,10 @@ public interface UserDao {
 
     UserEntity read(long userId);
 
-    void update(UserEntity userEntity);
+   // void updateUsername(String name);
+   // void updateEmail(String email);
+    //void updateNotificaations();
+
 
     void delete(long userId);
 

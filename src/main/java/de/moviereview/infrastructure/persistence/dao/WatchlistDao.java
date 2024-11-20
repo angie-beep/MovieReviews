@@ -1,5 +1,6 @@
 package de.moviereview.infrastructure.persistence.dao;
 
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import de.moviereview.infrastructure.persistence.entity.WatchlistEntity;
 
 import java.util.List;

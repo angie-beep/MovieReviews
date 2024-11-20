@@ -5,12 +5,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class ReviewDaoImpl {
+public class ReviewDaoImpl implements ReviewDao{
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager em = emf.createEntityManager();
 
 
-    public ReviewEntity create(ReviewEntity review) {
+    public void create(ReviewEntity review) {
         em.getTransaction().begin();
         if (review.getId() == null) {
             em.persist(review);
@@ -18,10 +18,9 @@ public class ReviewDaoImpl {
             review = em.merge(review);
         }
         em.getTransaction().commit();
-        return review;
     }
 
-    public void delete(Long id) {
+    public void delete(long id) {
         em.getTransaction().begin();
         ReviewEntity review = em.find(ReviewEntity.class, id);
         if (review != null) {
@@ -30,9 +29,13 @@ public class ReviewDaoImpl {
         em.getTransaction().commit();
     }
 
-    public ReviewEntity read(Long id) {
+    public ReviewEntity read(long id) {
         final ReviewEntity result = em.find(ReviewEntity.class, id);
         return result;
+    }
+
+    public void update(ReviewEntity review){
+
     }
 
     public void close() {

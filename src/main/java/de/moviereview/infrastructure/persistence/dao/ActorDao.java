@@ -11,7 +11,8 @@ public interface ActorDao {
 
     ActorEntity read( long actorId );
 
-    void update( ActorEntity actorEntity );
+    void updateFirstname(String firstname);
+    void updateLastname(String lastname);
 
     void delete( long actorId );
 

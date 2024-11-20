@@ -4,13 +4,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class LeaderboardDaoImpl {
+public class LeaderboardDaoImpl implements LeaderboardDao{
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager em = emf.createEntityManager();
 
 
-    public void delete(Long id) {
+    public void delete(long id) {
         em.getTransaction().begin();
         LeaderboardEntity leaderboard = em.find(LeaderboardEntity.class, id);
         if (leaderboard != null) {
@@ -19,9 +19,12 @@ public class LeaderboardDaoImpl {
         em.getTransaction().commit();
     }
 
-    public LeaderboardEntity read(Long id) {
+    public LeaderboardEntity read(long id) {
         final LeaderboardEntity result = em.find(LeaderboardEntity.class, id);
         return result;
+    }
+
+    public void update(LeaderboardEntity leaderboard){
     }
 
     public void close() {
