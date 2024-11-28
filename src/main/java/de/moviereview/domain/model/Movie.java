@@ -11,20 +11,20 @@ public class Movie {
     private String trailer;
     private double overallRating;
     private LocalDate publishingDate;
-    private String genre;
     private int length;
     private String originalLanguage;
     private Set<Actor> actors;
     private Set<Director> directors;
     private Set<Review> reviews;
     private Set<Watchlist> watchlist;
+    private Set<Genre> genres;
 
-    public Movie(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
+
+    public Movie(String title, String summary, String trailer, LocalDate publishingDate, int length, String originalLanguage) {
         this.title = title;
         this.summary = summary;
         this.trailer = trailer;
         this.publishingDate = publishingDate;
-        this.genre = genre;
         this.length = length;
         this.originalLanguage = originalLanguage;
         this.overallRating = 0.0; //default
@@ -34,14 +34,13 @@ public class Movie {
 
     }
 
-    public Movie(Long id, String title, String summary, String trailer, double overallRating, LocalDate publishingDate, String genre, int length, String originalLanguage, Set<Actor> actors, Set<Director> directors, Set<Review> reviews, Set<Watchlist> watchlist) {
+    public Movie(Long id, String title, String summary, String trailer, double overallRating, LocalDate publishingDate, int length, String originalLanguage, Set<Actor> actors, Set<Director> directors, Set<Review> reviews, Set<Watchlist> watchlist) {
         this.id = id;
         this.title = title;
         this.summary = summary;
         this.trailer = trailer;
         this.overallRating = overallRating;
         this.publishingDate = publishingDate;
-        this.genre = genre;
         this.length = length;
         this.originalLanguage = originalLanguage;
         this.actors = actors;
@@ -98,14 +97,6 @@ public class Movie {
 
     public void setPublishingDate(LocalDate publishingDate) {
         this.publishingDate = publishingDate;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public int getLength() {

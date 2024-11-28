@@ -49,8 +49,6 @@ public class TMDbService {
         String title = jsonResponse.substring(titleStartIndex, titleEndIndex);
         movie.setTitle(title);
 
-        // Standardwerte für Genre und andere Attribute (diese sollten ebenfalls geparst werden)
-        movie.setGenre("Unbekannt");
 
         return movie;
     }

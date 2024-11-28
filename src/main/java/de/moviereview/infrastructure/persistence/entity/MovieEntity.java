@@ -22,7 +22,6 @@ public class MovieEntity {
     @Column(name = "publishing_date")
     private LocalDate publishingDate;
 
-    private String genre;
     private int length;
 
     @Column(name = "original_language")
@@ -36,13 +35,14 @@ public class MovieEntity {
     private Set<ReviewEntity> reviews;
     @ManyToMany(mappedBy = "movies")
     private Set<WatchlistEntity> watchlist;
+    @ManyToMany(mappedBy = "movies")
+    private Set<GenreEntity> genres;
 
-    public MovieEntity(String title, String summary, String trailer, LocalDate publishingDate, String genre, int length, String originalLanguage) {
+    public MovieEntity(String title, String summary, String trailer, LocalDate publishingDate, int length, String originalLanguage) {
         this.title = title;
         this.summary = summary;
         this.trailer = trailer;
         this.publishingDate = publishingDate;
-        this.genre = genre;
         this.length = length;
         this.originalLanguage = originalLanguage;
         this.overallRating = 0.0; //default
@@ -100,14 +100,6 @@ public class MovieEntity {
 
     public void setPublishingDate(LocalDate publishingDate) {
         this.publishingDate = publishingDate;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public int getLength() {

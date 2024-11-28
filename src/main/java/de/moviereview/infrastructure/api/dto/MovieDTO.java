@@ -10,7 +10,6 @@ public class MovieDTO {
     private String trailer;
     private double overallRating;
     private LocalDate publishingDate;
-    private String genre;
     private int length;
     private String originalLanguage;
     private Set<Long> actorIds;
@@ -65,14 +64,6 @@ public class MovieDTO {
 
     public void setPublishingDate(LocalDate publishingDate) {
         this.publishingDate = publishingDate;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public int getLength() {
