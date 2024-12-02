@@ -55,6 +55,7 @@ public class DatabaseInitializer {
               `email` VARCHAR(155) NOT NULL,
               `notifications_enabled` BOOLEAN NOT NULL DEFAULT FALSE,
               `watchlist_id` INT NOT NULL,
+              `password` VARCHAR(45) NOT NULL,
               FOREIGN KEY (`watchlist_id`) REFERENCES `MovieReviews`.`watchlists` (`id`))
             );
             """;
