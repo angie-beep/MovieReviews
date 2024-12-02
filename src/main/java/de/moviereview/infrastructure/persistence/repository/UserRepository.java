@@ -3,6 +3,9 @@ import de.moviereview.domain.model.User;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.Optional;
+import de.moviereview.infrastructure.persistence.entity.ReviewEntity;
+import java.util.concurrent.atomic.AtomicLong;
+import com.github.javafaker.Faker;
 public class UserRepository {
     private final Map<Long, User> userStorage = new HashMap<>();
     private final AtomicLong idGenerator = new AtomicLong(1);

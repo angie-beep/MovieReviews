@@ -1,15 +1,52 @@
 type Query {
-  # Fetch movies by genre, director, or language
+  #MOVIE:
   getMovies(genre: String, director: String, language: String): [Movie]
+  getAllMovies: [Movie]
 
-  # Fetch reviews by a user
+  #REVIEW:
   getUserReviews(userId: ID!): [Review]
+  getReviewsByMovieId(movieId: ID!): [Review]
 
-  # Get the leaderboard for top-rated movies
+  #LEADERBOARD:
   getLeaderboard(genre: String): [Movie]
 
+  #DIRECTOR
+  getDirectors: [Director]
+
+  #ACTOR:
   getActors: [Actor] # Fetch all actors
   getActorById(id: ID!): Actor # Fetch a specific actor by ID
+
+  #USER
+  getUserById(id: ID!): User
+  getAllUsers: [User]
+
+  #WATCHLIST
+  getWatchlistById(id: ID!): Watchlist
+  getAllWatchlists: [Watchlist]
+  getWatchlistsByUserId(userId: ID!): [Watchlist]
+  getPublicWatchlists: [Watchlist]
+}
+
+#TYPES
+
+
+type Actor {
+  id: ID!
+  name: String!
+  movies: [Movie] # Movies the actor has acted in
+}
+
+type Director {
+  id: ID!
+  name: String!
+  movies: [Movie] # Movies the actor has acted in
+}
+
+type Genre {
+    id: ID!
+    genre: String!
+    movies: [Movie]
 }
 
 type Movie {
@@ -23,14 +60,6 @@ type Movie {
   reviews: [Review]  # Relationship to reviews
 }
 
-type User {
-    id: ID!
-    name: String
-    email: String
-}
-
-//review
-
 type Review {
   id: ID!
   movieId: ID!
@@ -40,20 +69,49 @@ type Review {
   createdAt: String
 }
 
+type User {
+    id: ID!
+    name: String
+    email: String
+    watchlist: Watchlist
+}
+
+type Watchlist {
+    id: ID!
+    isPublic: Boolean!
+    user: User!
+    movies: [Movie]
+}
+
+
 
 type Mutation {
   addActor(name: String!): Actor # Add a new actor
 
+  addDirector(name: String!): Director
+
   createReview(comment: String!, starRating: Int!, userId: ID!, movieId: ID!): Review
   updateReview(id: ID!, comment: String, starRating: Int): Review
   deleteReview(id: ID!): Boolean
+
+
+  createWatchlist(name: String!, userId: ID!, isPrivate: Boolean): Watchlist
+  addMovieToWatchlist(watchlistId: ID!, movieId: ID!): Watchlist
+  removeMovieFromWatchlist(watchlistId: ID!, movieId: ID!): Watchlist
+  setPublic(watchlistId: ID!, isPublic: Boolean!): Watchlist
+  deleteWatchlist(id: ID!): Boolean
+
+  createUser(name: String!, email: String!): User
+  updateUser(id: ID!, name: String, email: String): User
+  deleteUser(id: ID!): Boolean
+
+  addMovie(title: String!, genre: String!, releaseDate: String!, director: String, language: String): Movie
+  updateMovie(id: ID!, title: String, genre: String, releaseDate: String, director: String, language: String): Movie
+  deleteMovie(id: ID!): Boolean
+
 }
 
-type Actor {
-  id: ID!
-  name: String!
-  movies: [Movie] # Movies the actor has acted in
-}
+
 
 
 
