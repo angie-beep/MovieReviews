@@ -33,55 +33,143 @@ public class DatabaseInitializer {
 
     private static void createTables(Connection conn) throws Exception {
         String createMoviesTable = """
-            CREATE TABLE IF NOT EXISTS movies (
-                id INTEGER PRIMARY KEY,
-                title TEXT NOT NULL,
-                summary TEXT,
-                trailer INTEGER,
-                overall_rating REAL,
-                publishing_date DATETIME,
-                genre TEXT,
-                rank INTEGER,
-                length INTEGER,
-                original_language TEXT
+            DROP TABLE IF EXISTS `MovieReviews`.`movies` ;
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`movies` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `title` VARCHAR(255) NOT NULL,
+              `summary` TEXT NULL DEFAULT NULL,
+              `trailer` VARCHAR(255) NULL DEFAULT NULL,
+              `overall_rating` DOUBLE NULL DEFAULT NULL,
+              `publishing_date` DATE NULL DEFAULT NULL,
+              `genre` VARCHAR(45) NULL DEFAULT NULL,
+              `length` INT NULL DEFAULT NULL,
+              `original_language` VARCHAR(45) NULL DEFAULT NULL
             );
             """;
 
         String createUsersTable = """
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY,
-                username TEXT UNIQUE NOT NULL,
-                email TEXT UNIQUE,
-                notifications_enabled,
-                watchlist_id INTEGER
+            DROP TABLE IF EXISTS `MovieReviews`.`users` ;       
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`users` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `username` VARCHAR(45) NOT NULL,
+              `email` VARCHAR(155) NOT NULL,
+              `notifications_enabled` BOOLEAN NOT NULL DEFAULT FALSE,
+              `watchlist_id` INT NOT NULL,
+              FOREIGN KEY (`watchlist_id`) REFERENCES `MovieReviews`.`watchlists` (`id`))
             );
             """;
 
         String createReviewsTable = """
-            CREATE TABLE IF NOT EXISTS reviews (
-                id INTEGER PRIMARY KEY,
-                movie_id INTEGER,
-                user_id INTEGER,
-                star_rating INTEGER CHECK(rating >= 1 AND rating <= 5),
-                comment TEXT,
-                created_at DATETIME,
-                updated_at DATETIME,
-                FOREIGN KEY (movie_id) REFERENCES Movies(id),
-                FOREIGN KEY (user_id) REFERENCES Users(id)
+            DROP TABLE IF EXISTS `MovieReviews`.`reviews` ;
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`reviews` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `star_rating` INT NOT NULL,
+              `comment` TEXT NULL DEFAULT NULL,
+              `created_at` DATETIME NULL DEFAULT NULL,
+              `updated_at` DATETIME NULL DEFAULT NULL,
+              `user_id` INT NOT NULL,
+              `movie_id` INT NOT NULL,
+              FOREIGN KEY (`movie_id`) REFERENCES `MovieReviews`.`movies` (`id`),
+              FOREIGN KEY (`user_id`) REFERENCES `MovieReviews`.`users` (`id`)
             );
             """;
 
         String createActorsTable = """
-            CREATE TABLE IF NOT EXISTS actors (
-                id INTEGER PRIMARY KEY,
-                
+            DROP TABLE IF EXISTS `MovieReviews`.`actors` ;            
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`actors` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `lastname` VARCHAR(45) NOT NULL,
+              `firstname` VARCHAR(45) NULL DEFAULT NULL,
+              `birthday` DATE NULL DEFAULT NULL,
+              `heritage` VARCHAR(45) NULL DEFAULT NULL
+            );
+            """;
+
+        String createDirectorsTable = """
+            DROP TABLE IF EXISTS `MovieReviews`.`directors` ;            
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`directors` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `lastname` VARCHAR(45) NOT NULL,
+              `firstname` VARCHAR(45) NULL DEFAULT NULL,
+              `birthday` DATE NULL DEFAULT NULL,
+              `heritage` VARCHAR(45) NULL DEFAULT NULL
+            );
+            """;
+
+        String createWatchlistsTable = """           
+           DROP TABLE IF EXISTS `MovieReviews`.`watchlists` ;
+           CREATE TABLE IF NOT EXISTS `MovieReviews`.`watchlists` (
+             `id` INT PRIMARY KEY AUTO_INCREMENT,
+             `is_public` BOOLEAN NOT NULL DEFAULT FALSE,
+             `user_id` INT NOT NULL,
+             FOREIGN KEY (`user_id`) REFERENCES `MovieReviews`.`users` (`id`)
+            );
+            """;
+
+        String createActorMovieTable = """
+            DROP TABLE IF EXISTS `MovieReviews`.`actor_movie` ;
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`actor_movie` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `actor_id` INT NOT NULL,
+              `movie_id` INT NOT NULL,
+              FOREIGN KEY (`actor_id`) REFERENCES `MovieReviews`.`actors` (`id`),
+              FOREIGN KEY (`movie_id`) REFERENCES `MovieReviews`.`movies` (`id`)
+            );
+            """;
+
+        String createDirectorMovieTable = """
+            DROP TABLE IF EXISTS `MovieReviews`.`director_movie` ;
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`director_movie` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `director_id` INT NOT NULL,
+              `movie_id` INT NOT NULL,
+              FOREIGN KEY (`director_id`) REFERENCES `MovieReviews`.`directors` (`id`),
+              FOREIGN KEY (`movie_id`) REFERENCES `MovieReviews`.`movies` (`id`)
+            );
+            """;
+
+        String createGenresTable = """
+            DROP TABLE IF EXISTS `MovieReviews`.`genres` ;            
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`genres` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `genre` VARCHAR(45) NOT NULL,
+            );
+            """;
+
+        String createGenreMovieTable = """
+            DROP TABLE IF EXISTS `MovieReviews`.`genre_movie` ;
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`genre_movie` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `genre_id` INT NOT NULL,
+              `movie_id` INT NOT NULL,
+              FOREIGN KEY (`genre_id`) REFERENCES `MovieReviews`.`genres` (`id`),
+              FOREIGN KEY (`movie_id`) REFERENCES `MovieReviews`.`movies` (`id`)
+            );
+            """;
+
+        String createWatchlistMovieTable = """           
+            DROP TABLE IF EXISTS `MovieReviews`.`watchlist_movie` ;
+            CREATE TABLE IF NOT EXISTS `MovieReviews`.`watchlist_movie` (
+              `id` INT PRIMARY KEY AUTO_INCREMENT,
+              `watchlist_id` INT NULL DEFAULT NULL,
+              `movie_id` INT NOT NULL,
+              FOREIGN KEY (`movie_id`) REFERENCES `MovieReviews`.`movies` (`id`),
+              FOREIGN KEY (`watchlist_id`) REFERENCES `MovieReviews`.`watchlists` (`id`)
             );
             """;
 
         try (Statement stmt = conn.createStatement()) {
+            stmt.execute(createActorsTable);
+            stmt.execute(createDirectorsTable);
             stmt.execute(createMoviesTable);
             stmt.execute(createUsersTable);
             stmt.execute(createReviewsTable);
+            stmt.execute(createGenresTable);
+            stmt.execute(createWatchlistsTable);
+            stmt.execute(createActorMovieTable);
+            stmt.execute(createDirectorMovieTable);
+            stmt.execute(createWatchlistMovieTable);
+            stmt.execute(createGenreMovieTable);
         }
     }
 
