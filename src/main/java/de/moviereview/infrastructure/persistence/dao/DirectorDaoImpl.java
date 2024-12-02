@@ -34,9 +34,9 @@ public class DirectorDaoImpl implements DirectorDao {
         final DirectorEntity result = em.find(DirectorEntity.class, id);
         return result;
     }
-    @Override
-    public void update (DirectorEntity directorEntity){
-    };
+    //@Override
+    //public void update (DirectorEntity directorEntity){
+    //};
 
     public void close() {
         em.close();

@@ -10,8 +10,8 @@ public interface DirectorDao {
 
     DirectorEntity read( long directorId );
 
-    void updateFirstname(String firstname);
-    void updateLastname(String lastname);
+    //void updateFirstname(String firstname);
+    //void updateLastname(String lastname);
 
     void delete( long directorId );
 }
