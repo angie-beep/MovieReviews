@@ -1,0 +1,55 @@
+type Query {
+  # Fetch movies by genre, director, or language
+  getMovies(genre: String, director: String, language: String): [Movie]
+
+  # Fetch reviews by a user
+  getUserReviews(userId: ID!): [Review]
+
+  # Get the leaderboard for top-rated movies
+  getLeaderboard(genre: String): [Movie]
+}
+
+type Movie {
+  id: ID!
+  title: String!
+  genre: String!
+  releaseDate: String!
+  director: String
+  language: String
+  rating: Float
+  reviews: [Review]  # Relationship to reviews
+}
+
+//review
+
+type Review {
+  id: ID!
+  movieId: ID!
+  userId: ID!
+  rating: Int!
+  comment: String
+  createdAt: String
+}
+
+//Actor
+
+type Query {
+  getActors: [Actor] # Fetch all actors
+  getActorById(id: ID!): Actor # Fetch a specific actor by ID
+}
+
+type Mutation {
+  addActor(name: String!): Actor # Add a new actor
+}
+
+type Actor {
+  id: ID!
+  name: String!
+  movies: [Movie] # Movies the actor has acted in
+}
+
+
+
+
+
+
