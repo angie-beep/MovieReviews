@@ -1,5 +1,6 @@
 package de.moviereview.domain.service;
 
+import de.moviereview.domain.model.Movie;
 import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,7 +13,7 @@ public class TMDbService {
     private final String baseUrl = "https://api.themoviedb.org/3";
 
     // Diese Methode holt die Details eines Films anhand der TMDb-ID und gibt die Informationen als String zurück
-    public String fetchMovieDetails(Long movieId) {
+    public Movie fetchMovieDetails(Long movieId) {
         try {
             String urlStr = baseUrl + "/movie/" + movieId + "?api_key=" + apiKey;
             URL url = new URL(urlStr);
@@ -28,7 +29,7 @@ public class TMDbService {
                 }
                 reader.close();
 
-                return response.toString(); // Rückgabe der JSON-Antwort als String
+                //return response.toString(); // Rückgabe der JSON-Antwort als String
 
             } else {
                 System.out.println("Fehler beim Abrufen der Daten von TMDb: " + connection.getResponseCode());

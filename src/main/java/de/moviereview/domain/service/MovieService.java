@@ -1,5 +1,4 @@
 package de.moviereview.domain.service;
-import java.util.List;
 
 //Die Klasse ist fürrr Geschäftslogik und die ruf das repository auf
 //um DB-transaktionen durchzuführen
@@ -7,12 +6,15 @@ import java.util.List;
 import de.moviereview.domain.model.Movie;
 import de.moviereview.infrastructure.persistence.repository.MovieRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public class MovieService {
 
     private MovieRepository movieRepository = new MovieRepository();
     private TMDbService tmdbService = new TMDbService();
 
-    /*public Movie importMovieFromTMDb(String tmdbId) {
+    public Movie importMovieFromTMDb(Long tmdbId) {
         // Holen der Filmdetails von der TMDb API
         Movie movieFromTMDb = tmdbService.fetchMovieDetails(tmdbId);
         if (movieFromTMDb != null) {
@@ -21,7 +23,7 @@ public class MovieService {
         }
         System.out.println("Fehler: Film konnte nicht importiert werden.");
         return null;
-    }*/
+    }
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
@@ -35,12 +37,12 @@ public class MovieService {
         movieRepository.deleteById(id);
     }
 
-    public Movie findMovieById(Long id) {
-
+    public Optional<Movie> findMovieById(Long id) {
         return movieRepository.findById(id);
     }
 
-    public void closeRepository() {
-       // movieRepository.close();
-    }
+
+    /*public void closeRepository() {
+        movieRepository.close();
+    }*/
 }

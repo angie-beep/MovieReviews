@@ -1,5 +1,6 @@
 package de.moviereview.application;
 
+import de.moviereview.domain.model.Movie;
 import de.moviereview.domain.service.TMDbService;
 
 import java.util.Scanner;
@@ -38,7 +39,7 @@ public class MovieApp {
                     // Film-Details anzeigen (nach TMDb-ID)
                     System.out.print("Geben Sie die TMDb-ID des Films ein: ");
                     Long tmdbId = scanner.nextLong();
-                    String movieDetails = tmdbService.fetchMovieDetails(tmdbId);
+                    Movie movieDetails = tmdbService.fetchMovieDetails(tmdbId);
                     if (movieDetails != null) {
                         System.out.println("Film-Details von TMDb:");
                         System.out.println(movieDetails); // Zeigt die JSON-Antwort direkt an (kann angepasst werden)
