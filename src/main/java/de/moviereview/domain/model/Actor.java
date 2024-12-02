@@ -20,6 +20,14 @@ public class Actor {
 
     }
 
+    public Actor(String lastname, String firstname, LocalDate birthday, String heritage, Set<Movie> movies) {
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.birthday = birthday;
+        this.heritage = heritage;
+        this.movies = movies;
+    }
+
     public Actor(Long id, String lastname, String firstname, LocalDate birthday, String heritage, Set<Movie> movies) {
         this.id = id;
         this.lastname = lastname;
