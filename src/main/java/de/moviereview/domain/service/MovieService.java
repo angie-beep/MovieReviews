@@ -2,9 +2,13 @@ package de.moviereview.domain.service;
 
 //Die Klasse ist fürrr Geschäftslogik und die ruf das repository auf
 //um DB-transaktionen durchzuführen
+
+import de.moviereview.domain.model.Movie;
+import de.moviereview.infrastructure.persistence.repository.MovieRepository;
+
 public class MovieService {
 
-   /* private MovieRepository movieRepository = new MovieRepository();
+    private MovieRepository movieRepository = new MovieRepository();
     private TMDbService tmdbService = new TMDbService();
 
     public Movie importMovieFromTMDb(String tmdbId) {
@@ -36,5 +40,5 @@ public class MovieService {
 
     public void closeRepository() {
         movieRepository.close();
-    }*/
+    }
 }

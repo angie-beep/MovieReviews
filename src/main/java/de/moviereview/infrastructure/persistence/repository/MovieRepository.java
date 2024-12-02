@@ -3,6 +3,7 @@ import de.moviereview.domain.model.Movie;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
+
 public class MovieRepository {
     private final Map<Long, Movie> movieStorage = new HashMap<>();
     private final AtomicLong idGenerator = new AtomicLong(1);
