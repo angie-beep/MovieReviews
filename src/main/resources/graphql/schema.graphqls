@@ -7,6 +7,9 @@ type Query {
 
   # Get the leaderboard for top-rated movies
   getLeaderboard(genre: String): [Movie]
+
+  getActors: [Actor] # Fetch all actors
+  getActorById(id: ID!): Actor # Fetch a specific actor by ID
 }
 
 type Movie {
@@ -33,10 +36,7 @@ type Review {
 
 //Actor
 
-type Query {
-  getActors: [Actor] # Fetch all actors
-  getActorById(id: ID!): Actor # Fetch a specific actor by ID
-}
+
 
 type Mutation {
   addActor(name: String!): Actor # Add a new actor
