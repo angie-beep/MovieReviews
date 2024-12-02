@@ -23,6 +23,12 @@ type Movie {
   reviews: [Review]  # Relationship to reviews
 }
 
+type User {
+    id: ID!
+    name: String
+    email: String
+}
+
 //review
 
 type Review {
@@ -34,12 +40,13 @@ type Review {
   createdAt: String
 }
 
-//Actor
-
-
 
 type Mutation {
   addActor(name: String!): Actor # Add a new actor
+
+  createReview(comment: String!, starRating: Int!, userId: ID!, movieId: ID!): Review
+  updateReview(id: ID!, comment: String, starRating: Int): Review
+  deleteReview(id: ID!): Boolean
 }
 
 type Actor {
