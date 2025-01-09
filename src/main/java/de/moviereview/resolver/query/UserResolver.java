@@ -1,23 +1,28 @@
 package de.moviereview.resolver.query;
 
 import de.moviereview.domain.model.User;
-import de.moviereview.infrastructure.persistence.repository.UserRepository;
+import de.moviereview.domain.service.UserService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserResolver implements GraphQLQueryResolver {
 
-    private final UserRepository userRepository = new UserRepository();
+    private final UserService userService;
+
+    public UserResolver(UserService userService) {
+        this.userService = userService;
+    }
 
     // Fetch a User by ID
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + id));
+    public Optional<User> getUserById(Long id) {
+        return userService.findUserById(id);
     }
 
     // Fetch all Users
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+
+        return userService.findAll();
     }
 }

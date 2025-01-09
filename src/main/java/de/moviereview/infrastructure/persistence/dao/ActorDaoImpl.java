@@ -1,13 +1,8 @@
 package de.moviereview.infrastructure.persistence.dao;
 
 import de.moviereview.infrastructure.persistence.entity.ActorEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
-public class ActorDaoImpl implements ActorDao {
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-    private EntityManager em = emf.createEntityManager();
+public class ActorDaoImpl extends BaseDao implements ActorDao {
 
     @Override
     public ActorEntity read(long id) {
@@ -16,45 +11,41 @@ public class ActorDaoImpl implements ActorDao {
 
     @Override
     public void create(ActorEntity actor) {
-        em.getTransaction().begin();
+        beginTransaction();
         if (actor.getId() == null) {
-            em.persist(actor); // New actor
+            em.persist(actor);
         } else {
-            em.merge(actor); // Update existing actor
+            em.merge(actor);
         }
-        em.getTransaction().commit();
+        commitTransaction();
     }
 
     @Override
     public void updateFirstname(String firstname) {
-        em.getTransaction().begin();
+        beginTransaction();
         em.createQuery("UPDATE ActorEntity a SET a.firstname = :firstname")
                 .setParameter("firstname", firstname)
                 .executeUpdate();
-        em.getTransaction().commit();
+        commitTransaction();
     }
 
     @Override
     public void updateLastname(String lastname) {
-        em.getTransaction().begin();
+        beginTransaction();
         em.createQuery("UPDATE ActorEntity a SET a.lastname = :lastname")
                 .setParameter("lastname", lastname)
                 .executeUpdate();
-        em.getTransaction().commit();
+        commitTransaction();
     }
 
     @Override
     public void delete(long id) {
-        em.getTransaction().begin();
+        beginTransaction();
         ActorEntity actor = em.find(ActorEntity.class, id);
         if (actor != null) {
             em.remove(actor);
         }
-        em.getTransaction().commit();
-    }
-
-    public void close() {
-        em.close();
-        emf.close();
+        commitTransaction();
     }
 }
+

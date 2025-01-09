@@ -32,4 +32,8 @@ public class ActorService {
     public void saveActor(Actor actor) {
         actorRepository.save(ActorMapper.toEntity(actor));
     }
+
+    public Actor addActor(String firstname, String lastname, String birthday, String heritage) {
+        return null;
+    }
 }

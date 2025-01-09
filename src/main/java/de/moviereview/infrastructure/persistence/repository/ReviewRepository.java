@@ -1,40 +1,24 @@
 package de.moviereview.infrastructure.persistence.repository;
+
+
 import de.moviereview.domain.model.Review;
 import de.moviereview.infrastructure.persistence.entity.ReviewEntity;
-import java.util.concurrent.atomic.AtomicLong;
-import com.github.javafaker.Faker;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.*;
-public class ReviewRepository {
-    private final Map<Long, Review> reviewStorage = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
+import java.util.Collection;
+import java.util.List;
 
-    // Create or update a review
-    public Review save(Review review) {
-        if (review.getId() == null) {
-            review.setId(idGenerator.getAndIncrement());
-        }
-        reviewStorage.put(review.getId(), review);
-        return review;
-    }
+@Repository
+public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
 
-    // Find a review by ID
-    public Optional<Review> findById(Long id) {
-        return Optional.ofNullable(reviewStorage.get(id));
-    }
+    // Find reviews by movie ID
+    List<ReviewEntity> findByMovie_Id(Long movieId);
 
-    // Get all reviews
-    public List<Review> findAll() {
-        return new ArrayList<>(reviewStorage.values());
-    }
+    // Find reviews by user ID
+    List<ReviewEntity> findByUser_Id(Long userId);
 
-    // Delete a review by ID
-    public boolean deleteById(Long id) {
-        return reviewStorage.remove(id) != null;
-    }
+    List<ReviewEntity> findByMovieId(Long movieId);
 
-    // Check if a review exists by ID
-    public boolean existsById(Long id) {
-        return reviewStorage.containsKey(id);
-    }
+    List<ReviewEntity> findByUserId(Long userId);
 }

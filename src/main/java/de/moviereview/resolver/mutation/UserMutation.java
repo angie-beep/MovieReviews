@@ -1,27 +1,21 @@
 package de.moviereview.resolver.mutation;
 import de.moviereview.infrastructure.api.dto.UserDTO;
 import de.moviereview.domain.model.User;
-import de.moviereview.infrastructure.persistence.repository.UserRepository;
+import de.moviereview.domain.service.UserService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 
 public class UserMutation implements GraphQLMutationResolver {
 
-    private final UserRepository userRepository = new UserRepository();
+    private final UserService userService ;
+
+    public UserMutation(UserService userService) {
+        this.userService = userService;
+    }
+
 
     // Create a new User
     public User createUser(String name, String email) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be empty.");
-        }
-        if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("Email cannot be empty.");
-        }
-
-        User user = new User();
-        user.setUsername(name);
-        user.setEmail(email);
-
-        return userRepository.save(user);
+        return userService.saveUser(User);
     }
 
     // Update an existing User

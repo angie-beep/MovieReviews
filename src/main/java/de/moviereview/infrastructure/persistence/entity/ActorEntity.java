@@ -24,9 +24,9 @@ public class ActorEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "actor_movie",
-        joinColumns = @JoinColumn(name = "actor_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
+            name = "actor_movie",
+            joinColumns = @JoinColumn(name = "actor_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     private Set<MovieEntity> movies;
 
@@ -48,7 +48,7 @@ public class ActorEntity {
     }
 
     public void setLastName(String name) {
-        this.lastname = lastname;
+        this.lastname = name;
     }
 
     public String getFirstName() {

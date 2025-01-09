@@ -21,9 +21,9 @@ public class DirectorEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "director_movie",
-        joinColumns = @JoinColumn(name = "director_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
+            name = "director_movie",
+            joinColumns = @JoinColumn(name = "director_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     private Set<MovieEntity> movies;
 
@@ -52,7 +52,7 @@ public class DirectorEntity {
     }
 
     public void setLastName(String name) {
-        this.lastname = lastname;
+        this.lastname = name;
     }
 
     public String getFirstName() {
@@ -91,4 +91,4 @@ public class DirectorEntity {
         // Placeholder: Returning an empty list for now
         return new ArrayList<>();
     }
-   }
+}

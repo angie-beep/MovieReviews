@@ -9,12 +9,15 @@ import java.util.stream.Collectors;
 
 public class DirectorService {
     private final DirectorRepository directorRepository;
+    private final DirectorMapper directorMapper ;
 
-    public DirectorService(DirectorRepository directorRepository) {
+    public DirectorService(DirectorRepository directorRepository, DirectorMapper directorMapper ) {
+
         this.directorRepository = directorRepository;
+        this.directorMapper = directorMapper;
     }
 
-    public List<Director> getAllDirector() {
+    public List<Director> getAllDirectors() {
         return directorRepository.findAll().stream()
                 .map(DirectorMapper::toModel)
                 .collect(Collectors.toList());
@@ -29,4 +32,6 @@ public class DirectorService {
     public void saveDirector(Director director) {
         directorRepository.save(DirectorMapper.toEntity(director));
     }
+
+
 }

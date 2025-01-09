@@ -1,49 +1,32 @@
 package de.moviereview.infrastructure.persistence.dao;
 
 import de.moviereview.infrastructure.persistence.entity.UserEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
-public class UserDaoImpl implements UserDao{
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-    private EntityManager em = emf.createEntityManager();
+public class UserDaoImpl extends BaseDao implements UserDao {
 
-
+    @Override
     public void create(UserEntity user) {
-        em.getTransaction().begin();
+        beginTransaction();
         if (user.getId() == null) {
             em.persist(user);
         } else {
-            user = em.merge(user);
+            em.merge(user);
         }
-        em.getTransaction().commit();
+        commitTransaction();
     }
 
+    @Override
+    public UserEntity read(long id) {
+        return em.find(UserEntity.class, id);
+    }
+
+    @Override
     public void delete(long id) {
-        em.getTransaction().begin();
+        beginTransaction();
         UserEntity user = em.find(UserEntity.class, id);
         if (user != null) {
             em.remove(user);
         }
-        em.getTransaction().commit();
-    }
-
-    public UserEntity read(long id) {
-        final UserEntity result = em.find(UserEntity.class, id);
-        return result;
-    }
-
-    public void update(UserEntity userEntity){
-
-    }
-
-   // public void updateUsername(String name);
-   // public void updateEmail(String email);
-    //public void updateNotificaations();
-
-    public void close() {
-        em.close();
-        emf.close();
+        commitTransaction();
     }
 }

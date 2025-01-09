@@ -1,7 +1,9 @@
 package de.moviereview.domain.service;
 
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.moviereview.domain.model.Movie;
-import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -12,7 +14,7 @@ public class TMDbService {
     private final String apiKey = "0e14c15b7f0b81396f35e3f9c93f3f8c"; // Dein API Key hier
     private final String baseUrl = "https://api.themoviedb.org/3";
 
-    // Diese Methode holt die Details eines Films anhand der TMDb-ID und gibt die Informationen als String zurück
+    // Fetch movie details by TMDb ID and parse it into a Movie object
     public Movie fetchMovieDetails(Long movieId) {
         try {
             String urlStr = baseUrl + "/movie/" + movieId + "?api_key=" + apiKey;
@@ -29,10 +31,10 @@ public class TMDbService {
                 }
                 reader.close();
 
-                //return response.toString(); // Rückgabe der JSON-Antwort als String
+                return parseMovieFromJson(response.toString());
 
             } else {
-                System.out.println("Fehler beim Abrufen der Daten von TMDb: " + connection.getResponseCode());
+                System.out.println("Error fetching data from TMDb: " + connection.getResponseCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,25 +42,29 @@ public class TMDbService {
         return null;
     }
 
-    // Methode zum Parsen der JSON-Daten in ein Movie-Objekt
-    private MovieEntity parseMovieFromJson(String jsonResponse) {
-        MovieEntity movie = new MovieEntity();
-        // Beispielhafte Parsing-Logik, um den Titel zu extrahieren
-        String titleKey = "\"title\":\"";
-        int titleStartIndex = jsonResponse.indexOf(titleKey) + titleKey.length();
-        int titleEndIndex = jsonResponse.indexOf("\"", titleStartIndex);
-        String title = jsonResponse.substring(titleStartIndex, titleEndIndex);
-        movie.setTitle(title);
+    // Parse JSON data into a Movie object
+    private Movie parseMovieFromJson(String jsonResponse) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(jsonResponse);
 
+            Movie movie = new Movie();
+            movie.setTitle(rootNode.get("title").asText());
+            movie.setSummary(rootNode.get("overview").asText());
+            movie.setTrailer("https://www.youtube.com/watch?v=" + rootNode.get("video").asText()); // Placeholder
+            movie.setPublishingDate(java.time.LocalDate.parse(rootNode.get("release_date").asText()));
+            movie.setLength(rootNode.get("runtime").asInt());
+            movie.setOriginalLanguage(rootNode.get("original_language").asText());
+            movie.setOverallRating(rootNode.get("vote_average").asDouble());
 
-        return movie;
+            return movie;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-
-
-
-
-    // Diese Methode holt die beliebtesten Filme und gibt die Informationen als String zurück
+    // Fetch popular movies and return a list of JSON responses
     public String fetchPopularMovies() {
         try {
             String urlStr = baseUrl + "/movie/popular?api_key=" + apiKey;
@@ -75,10 +81,10 @@ public class TMDbService {
                 }
                 reader.close();
 
-                return response.toString(); // Rückgabe der JSON-Antwort als String
+                return response.toString(); // Return JSON response as String
 
             } else {
-                System.out.println("Fehler beim Abrufen der Daten von TMDb: " + connection.getResponseCode());
+                System.out.println("Error fetching data from TMDb: " + connection.getResponseCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

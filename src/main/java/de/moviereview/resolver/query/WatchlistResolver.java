@@ -1,37 +1,40 @@
 package de.moviereview.resolver.query;
 
 import de.moviereview.domain.model.Watchlist;
-import de.moviereview.infrastructure.persistence.repository.WatchlistRepository;
+import de.moviereview.domain.service.WatchlistService;
+import de.moviereview.infrastructure.api.mapper.WatchlistMapper;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WatchlistResolver implements GraphQLQueryResolver {
 
-    private final WatchlistRepository watchlistRepository = new WatchlistRepository();
+    private final WatchlistService watchlistService;
+
+    public WatchlistResolver(WatchlistService watchlistService) {
+        this.watchlistService = watchlistService;
+    }
 
     // Fetch a Watchlist by ID
     public Watchlist getWatchlistById(Long id) {
-        return watchlistRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Watchlist not found with ID: " + id));
+        return watchlistService.findWatchlistById(id);
     }
 
     // Fetch all Watchlists
     public List<Watchlist> getAllWatchlists() {
-        return watchlistRepository.findAll();
+        return (List<Watchlist>) watchlistService.findAllWatchlists().stream();
     }
 
     // Fetch Watchlists by User ID
     public List<Watchlist> getWatchlistsByUserId(Long userId) {
-        return watchlistRepository.findAll().stream()
-                .filter(watchlist -> watchlist.getUser().getId().equals(userId))
-                .toList();
+        return (List<Watchlist>) watchlistService.findWatchlistsByUserId(userId).stream();
+
     }
 
     // Fetch Public Watchlists
     public List<Watchlist> getPublicWatchlists() {
-        return watchlistRepository.findAll().stream()
-                .filter(watchlist -> !watchlist.isPublic())
-                .toList();
+        return (List<Watchlist>) watchlistService.findPublicWatchlists().stream();
+
     }
 }

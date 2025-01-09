@@ -1,39 +1,24 @@
 package de.moviereview.infrastructure.persistence.repository;
-import de.moviereview.domain.model.Movie;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public class MovieRepository {
-    private final Map<Long, Movie> movieStorage = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
+import java.util.Collection;
+import java.util.List;
 
-    // Create or update a movie
-    public Movie save(Movie movie) {
-        if (movie.getId() == null) {
-            movie.setId(idGenerator.getAndIncrement());
-        }
-        movieStorage.put(movie.getId(), movie);
-        return movie;
-    }
+@Repository
+public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
 
-    // Find a movie by ID
-    public Optional<Movie> findById(Long id) {
-        return Optional.ofNullable(movieStorage.get(id));
-    }
+    // Find movies by genre
+    List<MovieEntity> findByGenres_GenreIgnoreCase(String genre);
 
-    // Get all movies
-    public List<Movie> findAll() {
-        return new ArrayList<>(movieStorage.values());
-    }
+    // Find movies by director's last name
+    List<MovieEntity> findByDirectors_LastnameIgnoreCase(String lastname);
 
-    // Delete a movie by ID
-    public boolean deleteById(Long id) {
-        return movieStorage.remove(id) != null;
-    }
+    // Find movies by original language
+    List<MovieEntity> findByOriginalLanguageIgnoreCase(String language);
 
-    // Check if a movie exists by ID
-    public boolean existsById(Long id) {
-        return movieStorage.containsKey(id);
-    }
+   List<MovieEntity> findByActorId(Long actorId);
 }
+

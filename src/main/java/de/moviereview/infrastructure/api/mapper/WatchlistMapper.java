@@ -10,43 +10,43 @@ public class WatchlistMapper {
 
     public static Watchlist toModel(WatchlistEntity entity) {
         if (entity == null) {
-            return null;
+            throw new IllegalArgumentException("WatchlistEntity cannot be null");
         }
         return new Watchlist(
                 entity.getId(),
                 entity.isPublic(),
-                UserMapper.toModel(entity.getUser()),
-                entity.getMovies().stream().map(MovieMapper::toModel).collect(Collectors.toSet())
+                entity.getUser() != null ? UserMapper.toModel(entity.getUser()) : null,
+                entity.getMovies() != null ? entity.getMovies().stream().map(MovieMapper::toModel).collect(Collectors.toSet()) : null
         );
     }
 
     public static WatchlistEntity toEntity(Watchlist model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Watchlist model cannot be null");
         }
         WatchlistEntity entity = new WatchlistEntity();
         entity.setId(model.getId());
         entity.setPublic(model.isPublic());
-        entity.setUser(UserMapper.toEntity(model.getUser()));
-        entity.setMovies(model.getMovies().stream().map(MovieMapper::toEntity).collect(Collectors.toSet()));
+        entity.setUser(model.getUser() != null ? UserMapper.toEntity(model.getUser()) : null);
+        entity.setMovies(model.getMovies() != null ? model.getMovies().stream().map(MovieMapper::toEntity).collect(Collectors.toSet()) : null);
         return entity;
     }
 
     public static WatchlistDTO toDto(Watchlist model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Watchlist model cannot be null");
         }
         WatchlistDTO dto = new WatchlistDTO();
         dto.setId(model.getId());
         dto.setPublic(model.isPublic());
-        dto.setUserId(model.getUser().getId());
-        dto.setMovieIds(model.getMovies().stream().map(movie -> movie.getId()).collect(Collectors.toSet()));
+        dto.setUserId(model.getUser() != null ? model.getUser().getId() : null);
+        dto.setMovieIds(model.getMovies() != null ? model.getMovies().stream().map(movie -> movie.getId()).collect(Collectors.toSet()) : null);
         return dto;
     }
 
     public static Watchlist toModel(WatchlistDTO dto) {
         if (dto == null) {
-            return null;
+            throw new IllegalArgumentException("WatchlistDTO cannot be null");
         }
         return new Watchlist(
                 dto.getId(),

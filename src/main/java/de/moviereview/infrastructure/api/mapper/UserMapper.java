@@ -10,35 +10,35 @@ public class UserMapper {
 
     public static User toModel(UserEntity entity) {
         if (entity == null) {
-            return null;
+            throw new IllegalArgumentException("UserEntity cannot be null");
         }
         return new User(
                 entity.getId(),
                 entity.getUsername(),
                 entity.getEmail(),
                 entity.isNotificationsEnabled(),
-                WatchlistMapper.toModel(entity.getWatchlist()),
-                entity.getReviews().stream().map(ReviewMapper::toModel).collect(Collectors.toSet())
+                entity.getWatchlist() != null ? WatchlistMapper.toModel(entity.getWatchlist()) : null,
+                entity.getReviews() != null ? entity.getReviews().stream().map(ReviewMapper::toModel).collect(Collectors.toSet()) : null
         );
     }
 
     public static UserEntity toEntity(User model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("User model cannot be null");
         }
         UserEntity entity = new UserEntity();
         entity.setId(model.getId());
         entity.setUsername(model.getUsername());
         entity.setEmail(model.getEmail());
         entity.setNotificationsEnabled(model.isNotificationsEnabled());
-        entity.setWatchlist(WatchlistMapper.toEntity(model.getWatchlist()));
-        entity.setReviews(model.getReviews().stream().map(ReviewMapper::toEntity).collect(Collectors.toSet()));
+        entity.setWatchlist(model.getWatchlist() != null ? WatchlistMapper.toEntity(model.getWatchlist()) : null);
+        entity.setReviews(model.getReviews() != null ? model.getReviews().stream().map(ReviewMapper::toEntity).collect(Collectors.toSet()) : null);
         return entity;
     }
 
     public static UserDTO toDto(User model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("User model cannot be null");
         }
         UserDTO dto = new UserDTO();
         dto.setId(model.getId());
@@ -46,13 +46,13 @@ public class UserMapper {
         dto.setEmail(model.getEmail());
         dto.setNotificationsEnabled(model.isNotificationsEnabled());
         dto.setWatchlistId(model.getWatchlist() != null ? model.getWatchlist().getId() : null);
-        dto.setReviewIds(model.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()));
+        dto.setReviewIds(model.getReviews() != null ? model.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()) : null);
         return dto;
     }
 
     public static User toModel(UserDTO dto) {
         if (dto == null) {
-            return null;
+            throw new IllegalArgumentException("UserDTO cannot be null");
         }
         return new User(
                 dto.getId(),

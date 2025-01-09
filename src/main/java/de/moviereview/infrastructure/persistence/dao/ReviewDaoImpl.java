@@ -1,46 +1,39 @@
 package de.moviereview.infrastructure.persistence.dao;
 
 import de.moviereview.infrastructure.persistence.entity.ReviewEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
-public class ReviewDaoImpl implements ReviewDao{
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-    private EntityManager em = emf.createEntityManager();
+public class ReviewDaoImpl extends BaseDao implements ReviewDao {
 
-
+    @Override
     public void create(ReviewEntity review) {
-        em.getTransaction().begin();
+        beginTransaction();
         if (review.getId() == null) {
             em.persist(review);
         } else {
-            review = em.merge(review);
+            em.merge(review);
         }
-        em.getTransaction().commit();
+        commitTransaction();
     }
 
+    @Override
+    public ReviewEntity read(long id) {
+        return em.find(ReviewEntity.class, id);
+    }
+
+    @Override
+    public void update(ReviewEntity reviewEntity) {
+        beginTransaction();
+        em.merge(reviewEntity);
+        commitTransaction();
+    }
+
+    @Override
     public void delete(long id) {
-        em.getTransaction().begin();
+        beginTransaction();
         ReviewEntity review = em.find(ReviewEntity.class, id);
         if (review != null) {
             em.remove(review);
         }
-        em.getTransaction().commit();
-    }
-
-    public ReviewEntity read(long id) {
-        final ReviewEntity result = em.find(ReviewEntity.class, id);
-        return result;
-    }
-
-    public void update(ReviewEntity review){
-
-    }
-
-    public void close() {
-        em.close();
-        emf.close();
+        commitTransaction();
     }
 }
-

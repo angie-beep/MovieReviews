@@ -10,7 +10,7 @@ public class DirectorMapper {
 
     public static Director toModel(DirectorEntity entity) {
         if (entity == null) {
-            return null;
+            throw new IllegalArgumentException("DirectorEntity cannot be null");
         }
         return new Director(
                 entity.getId(),
@@ -18,13 +18,13 @@ public class DirectorMapper {
                 entity.getFirstName(),
                 entity.getBirthday(),
                 entity.getHeritage(),
-                entity.getMovies().stream().map(MovieMapper::toModel).collect(Collectors.toSet())
+                entity.getMovies() != null ? entity.getMovies().stream().map(MovieMapper::toModel).collect(Collectors.toSet()) : null
         );
     }
 
     public static DirectorEntity toEntity(Director model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Director model cannot be null");
         }
         DirectorEntity entity = new DirectorEntity();
         entity.setId(model.getId());
@@ -32,13 +32,13 @@ public class DirectorMapper {
         entity.setFirstName(model.getFirstName());
         entity.setBirthday(model.getBirthday());
         entity.setHeritage(model.getHeritage());
-        entity.setMovies(model.getMovies().stream().map(MovieMapper::toEntity).collect(Collectors.toSet()));
+        entity.setMovies(model.getMovies() != null ? model.getMovies().stream().map(MovieMapper::toEntity).collect(Collectors.toSet()) : null);
         return entity;
     }
 
     public static DirectorDTO toDto(Director model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Director model cannot be null");
         }
         DirectorDTO dto = new DirectorDTO();
         dto.setId(model.getId());
@@ -46,13 +46,13 @@ public class DirectorMapper {
         dto.setFirstname(model.getFirstName());
         dto.setBirthday(model.getBirthday());
         dto.setHeritage(model.getHeritage());
-        dto.setMovieIds(model.getMovies().stream().map(movie -> movie.getId()).collect(Collectors.toSet()));
+        dto.setMovieIds(model.getMovies() != null ? model.getMovies().stream().map(movie -> movie.getId()).collect(Collectors.toSet()) : null);
         return dto;
     }
 
     public static Director toModel(DirectorDTO dto) {
         if (dto == null) {
-            return null;
+            throw new IllegalArgumentException("DirectorDTO cannot be null");
         }
         return new Director(
                 dto.getId(),
@@ -60,7 +60,7 @@ public class DirectorMapper {
                 dto.getFirstname(),
                 dto.getBirthday(),
                 dto.getHeritage(),
-                null // Mapping movie IDs to Movie objects should be handled elsewhere
+                null // Mapping movie IDs to Movie objects should be handled separately
         );
     }
 }

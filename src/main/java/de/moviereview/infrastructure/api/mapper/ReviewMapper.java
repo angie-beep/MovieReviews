@@ -6,9 +6,9 @@ import de.moviereview.infrastructure.persistence.entity.ReviewEntity;
 
 public class ReviewMapper {
 
-    public static Review toModel(ReviewEntity entity) {
+    public Review toModel(ReviewEntity entity) {
         if (entity == null) {
-            return null;
+            throw new IllegalArgumentException("ReviewEntity cannot be null");
         }
         return new Review(
                 entity.getId(),
@@ -23,7 +23,7 @@ public class ReviewMapper {
 
     public static ReviewEntity toEntity(Review model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Review model cannot be null");
         }
         ReviewEntity entity = new ReviewEntity();
         entity.setId(model.getId());
@@ -38,12 +38,12 @@ public class ReviewMapper {
 
     public static ReviewDTO toDto(Review model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Review model cannot be null");
         }
         ReviewDTO dto = new ReviewDTO();
         dto.setId(model.getId());
-        dto.setUserId(model.getUser().getId());
-        dto.setMovieId(model.getMovie().getId());
+        dto.setUserId(model.getUser() != null ? model.getUser().getId() : null);
+        dto.setMovieId(model.getMovie() != null ? model.getMovie().getId() : null);
         dto.setStarRating(model.getStarRating());
         dto.setComment(model.getComment());
         dto.setCreatedAt(model.getCreatedAt());
@@ -53,7 +53,7 @@ public class ReviewMapper {
 
     public static Review toModel(ReviewDTO dto) {
         if (dto == null) {
-            return null;
+            throw new IllegalArgumentException("ReviewDTO cannot be null");
         }
         return new Review(
                 dto.getId(),

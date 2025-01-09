@@ -123,7 +123,7 @@ public class Movie {
         this.actors = actors;
     }
 
-    public Set<Director> getDirector() {
+    public Set<Director> getDirectors() {
         return directors;
     }
 
@@ -145,6 +145,10 @@ public class Movie {
 
     public void setWatchlist(Set<Watchlist> watchlist) {
         this.watchlist = watchlist;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
     }
 }
 

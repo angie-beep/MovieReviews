@@ -1,6 +1,6 @@
 package de.moviereview.infrastructure.api.mapper;
 
-import de.moviereview.domain.model.*;
+import de.moviereview.domain.model.Movie;
 import de.moviereview.infrastructure.api.dto.MovieDTO;
 import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 
@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class MovieMapper {
 
-    public static Movie toModel(MovieEntity entity) {
+    public Movie toModel(MovieEntity entity) {
         if (entity == null) {
-            return null;
+            throw new IllegalArgumentException("MovieEntity cannot be null");
         }
         return new Movie(
                 entity.getId(),
@@ -21,16 +21,16 @@ public class MovieMapper {
                 entity.getPublishingDate(),
                 entity.getLength(),
                 entity.getOriginalLanguage(),
-                entity.getActors().stream().map(ActorMapper::toModel).collect(Collectors.toSet()),
-                entity.getDirector().stream().map(DirectorMapper::toModel).collect(Collectors.toSet()),
-                entity.getReviews().stream().map(ReviewMapper::toModel).collect(Collectors.toSet()),
-                entity.getWatchlist().stream().map(WatchlistMapper::toModel).collect(Collectors.toSet())
+                entity.getActors() != null ? entity.getActors().stream().map(ActorMapper::toModel).collect(Collectors.toSet()) : null,
+                entity.getDirectors() != null ? entity.getDirectors().stream().map(DirectorMapper::toModel).collect(Collectors.toSet()) : null,
+                entity.getReviews() != null ? entity.getReviews().stream().map(ReviewMapper::toModel).collect(Collectors.toSet()) : null,
+                entity.getWatchlist() != null ? entity.getWatchlist().stream().map(WatchlistMapper::toModel).collect(Collectors.toSet()) : null
         );
     }
 
     public static MovieEntity toEntity(Movie model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Movie model cannot be null");
         }
         MovieEntity entity = new MovieEntity();
         entity.setId(model.getId());
@@ -41,16 +41,16 @@ public class MovieMapper {
         entity.setPublishingDate(model.getPublishingDate());
         entity.setLength(model.getLength());
         entity.setOriginalLanguage(model.getOriginalLanguage());
-        entity.setActors(model.getActors().stream().map(ActorMapper::toEntity).collect(Collectors.toSet()));
-        entity.setDirectors(model.getDirector().stream().map(DirectorMapper::toEntity).collect(Collectors.toSet()));
-        entity.setReviews(model.getReviews().stream().map(ReviewMapper::toEntity).collect(Collectors.toSet()));
-        entity.setWatchlist(model.getWatchlist().stream().map(WatchlistMapper::toEntity).collect(Collectors.toSet()));
+        entity.setActors(model.getActors() != null ? model.getActors().stream().map(ActorMapper::toEntity).collect(Collectors.toSet()) : null);
+        entity.setDirectors(model.getDirectors() != null ? model.getDirectors().stream().map(DirectorMapper::toEntity).collect(Collectors.toSet()) : null);
+        entity.setReviews(model.getReviews() != null ? model.getReviews().stream().map(ReviewMapper::toEntity).collect(Collectors.toSet()) : null);
+        entity.setWatchlist(model.getWatchlist() != null ? model.getWatchlist().stream().map(WatchlistMapper::toEntity).collect(Collectors.toSet()) : null);
         return entity;
     }
 
     public static MovieDTO toDto(Movie model) {
         if (model == null) {
-            return null;
+            throw new IllegalArgumentException("Movie model cannot be null");
         }
         MovieDTO dto = new MovieDTO();
         dto.setId(model.getId());
@@ -61,16 +61,16 @@ public class MovieMapper {
         dto.setPublishingDate(model.getPublishingDate());
         dto.setLength(model.getLength());
         dto.setOriginalLanguage(model.getOriginalLanguage());
-        dto.setActorIds(model.getActors().stream().map(Actor::getId).collect(Collectors.toSet()));
-        dto.setDirectorIds(model.getDirector().stream().map(Director::getId).collect(Collectors.toSet()));
-        dto.setReviewIds(model.getReviews().stream().map(Review::getId).collect(Collectors.toSet()));
-        dto.setWatchlistIds(model.getWatchlist().stream().map(Watchlist::getId).collect(Collectors.toSet()));
+        dto.setActorIds(model.getActors() != null ? model.getActors().stream().map(actor -> actor.getId()).collect(Collectors.toSet()) : null);
+        dto.setDirectorIds(model.getDirector() != null ? model.getDirector().stream().map(director -> director.getId()).collect(Collectors.toSet()) : null);
+        dto.setReviewIds(model.getReviews() != null ? model.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()) : null);
+        dto.setWatchlistIds(model.getWatchlist() != null ? model.getWatchlist().stream().map(watchlist -> watchlist.getId()).collect(Collectors.toSet()) : null);
         return dto;
     }
 
     public static Movie toModel(MovieDTO dto) {
         if (dto == null) {
-            return null;
+            throw new IllegalArgumentException("MovieDTO cannot be null");
         }
         return new Movie(
                 dto.getId(),

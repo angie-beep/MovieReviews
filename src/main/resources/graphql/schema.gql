@@ -1,7 +1,8 @@
 type Query {
   #MOVIE:
-  getMovies(genre: String, director: String, language: String): [Movie]
+  getMovies(genre: String, director: String, originalLanguage: String): [Movie]
   getAllMovies: [Movie]
+  getMoviesByActor(actorId: ID!): [Movie]
 
   #REVIEW:
   getUserReviews(userId: ID!): [Review]
@@ -30,23 +31,28 @@ type Query {
 
 #TYPES
 
-
 type Actor {
   id: ID!
-  name: String!
+  firstname: String!
+  lastname: String!
+  birthday: String
+  heritage: String
   movies: [Movie] # Movies the actor has acted in
 }
 
 type Director {
   id: ID!
-  name: String!
-  movies: [Movie] # Movies the actor has acted in
+  firstname: String!
+  lastname: String!
+  birthday: String
+  heritage: String
+  movies: [Movie] # Movies directed by the director
 }
 
 type Genre {
-    id: ID!
-    genre: String!
-    movies: [Movie]
+  id: ID!
+  genre: String!
+  movies: [Movie]
 }
 
 type Movie {
@@ -54,10 +60,12 @@ type Movie {
   title: String!
   genre: String!
   releaseDate: String!
-  director: String
-  language: String
+  director: Director
+  originalLanguage: String
   rating: Float
+  length: Int
   reviews: [Review]  # Relationship to reviews
+  actors: [Actor] # Actors in the movie
 }
 
 type Review {
@@ -70,30 +78,27 @@ type Review {
 }
 
 type User {
-    id: ID!
-    name: String
-    email: String
-    watchlist: Watchlist
+  id: ID!
+  name: String
+  email: String
+  watchlist: Watchlist
 }
 
 type Watchlist {
-    id: ID!
-    isPublic: Boolean!
-    user: User!
-    movies: [Movie]
+  id: ID!
+  isPublic: Boolean!
+  user: User!
+  movies: [Movie]
 }
 
-
-
 type Mutation {
-  addActor(name: String!): Actor # Add a new actor
+  addActor(firstname: String!, lastname: String!, birthday: String, heritage: String): Actor # Add a new actor
 
-  addDirector(name: String!): Director
+  addDirector(firstname: String!, lastname: String!, birthday: String, heritage: String): Director
 
   createReview(comment: String!, starRating: Int!, userId: ID!, movieId: ID!): Review
   updateReview(id: ID!, comment: String, starRating: Int): Review
   deleteReview(id: ID!): Boolean
-
 
   createWatchlist(name: String!, userId: ID!, isPrivate: Boolean): Watchlist
   addMovieToWatchlist(watchlistId: ID!, movieId: ID!): Watchlist
@@ -105,13 +110,10 @@ type Mutation {
   updateUser(id: ID!, name: String, email: String): User
   deleteUser(id: ID!): Boolean
 
-  addMovie(title: String!, genre: String!, releaseDate: String!, director: String, language: String): Movie
-  updateMovie(id: ID!, title: String, genre: String, releaseDate: String, director: String, language: String): Movie
+  addMovie(title: String!, genre: String!, releaseDate: String!, director: String, originalLanguage: String, length: Int): Movie
+  updateMovie(id: ID!, title: String, genre: String, releaseDate: String, director: String, originalLanguage: String, length: Int): Movie
   deleteMovie(id: ID!): Boolean
-
 }
-
-
 
 
 

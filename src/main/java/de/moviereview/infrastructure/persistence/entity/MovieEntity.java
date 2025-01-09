@@ -31,7 +31,7 @@ public class MovieEntity {
     private Set<ActorEntity> actors;
     @ManyToMany(mappedBy = "movies")
     private Set<DirectorEntity> directors;
-    @OneToMany(mappedBy = "movies")
+    @OneToMany(mappedBy = "movie")
     private Set<ReviewEntity> reviews;
     @ManyToMany(mappedBy = "movies")
     private Set<WatchlistEntity> watchlist;
@@ -126,7 +126,7 @@ public class MovieEntity {
         this.actors = actors;
     }
 
-    public Set<DirectorEntity> getDirector() {
+    public Set<DirectorEntity> getDirectors() {
         return directors;
     }
 
@@ -149,6 +149,8 @@ public class MovieEntity {
     public void setWatchlist(Set<WatchlistEntity> watchlist) {
         this.watchlist = watchlist;
     }
+
+    public Set<GenreEntity> getGenres() {
+        return genres;
+    }
 }
-
-

@@ -1,48 +1,85 @@
 package de.moviereview.domain.service;
 
-//Die Klasse ist fürrr Geschäftslogik und die ruf das repository auf
-//um DB-transaktionen durchzuführen
-
 import de.moviereview.domain.model.Movie;
+import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import de.moviereview.infrastructure.persistence.repository.MovieRepository;
+import de.moviereview.infrastructure.api.mapper.MovieMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MovieService {
 
-    private MovieRepository movieRepository = new MovieRepository();
-    private TMDbService tmdbService = new TMDbService();
+    private final MovieRepository movieRepository;
+    private final TMDbService tmdbService;
+    private final MovieMapper movieMapper;
 
+    public MovieService(MovieRepository movieRepository, TMDbService tmdbService, MovieMapper movieMapper) {
+        this.movieRepository = movieRepository;
+        this.tmdbService = tmdbService;
+        this.movieMapper = movieMapper;
+    }
+
+    // Import a movie from TMDb using its ID
     public Movie importMovieFromTMDb(Long tmdbId) {
-        // Holen der Filmdetails von der TMDb API
         Movie movieFromTMDb = tmdbService.fetchMovieDetails(tmdbId);
         if (movieFromTMDb != null) {
-            // Speichern des Films in der lokalen Datenbank
-            return movieRepository.save(movieFromTMDb);
+            MovieEntity savedEntity = movieRepository.save(movieMapper.toEntity(movieFromTMDb));
+            return movieMapper.toModel(savedEntity);
         }
-        System.out.println("Fehler: Film konnte nicht importiert werden.");
+        throw new IllegalArgumentException("Error: Could not import movie from TMDb.");
+    }
+
+    // Get all movies
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll().stream()
+                .map(movieMapper::toModel)
+                .collect(Collectors.toList());
+    }
+
+    // Get movies filtered by genre, language, or director
+    public List<Movie> getMoviesByFilters(String genre, String director, String originalLanguage) {
+        return movieRepository.findAll().stream()
+                .map(movieMapper::toModel)
+                .filter(movie -> (genre == null || movie.getGenres().stream().anyMatch(g -> g.getGenre().equalsIgnoreCase(genre))) &&
+                        (director == null || movie.getDirectors().stream().anyMatch(d -> d.getLastName().equalsIgnoreCase(director))) &&
+                        (originalLanguage == null || movie.getOriginalLanguage().equalsIgnoreCase(originalLanguage)))
+                .collect(Collectors.toList());
+    }
+
+    // Save a movie
+    public Movie saveMovie(Movie movie) {
+        MovieEntity savedEntity = movieRepository.save(movieMapper.toEntity(movie));
+        return movieMapper.toModel(savedEntity);
+    }
+
+    // Delete a movie by ID
+    public Boolean deleteMovie(Long id) {
+        if (!movieRepository.existsById(id)) {
+            throw new IllegalArgumentException("Movie not found with ID: " + id);
+        }
+        movieRepository.deleteById(id);
         return null;
     }
 
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
-    }
-
-    public Movie saveMovie(Movie movie) {
-        return movieRepository.save(movie);
-    }
-
-    public void deleteMovie(Long id) {
-        movieRepository.deleteById(id);
-    }
-
+    // Find a movie by ID
     public Optional<Movie> findMovieById(Long id) {
-        return movieRepository.findById(id);
+        return movieRepository.findById(id)
+                .map(movieMapper::toModel);
     }
 
+    public Movie addMovie(String title, String genre, String releaseDate, String director, String originalLanguage, int length) {
+        return null;
+    }
 
-    /*public void closeRepository() {
-        movieRepository.close();
-    }*/
+    public Movie updateMovie(Long id, String title, String genre, String releaseDate, String director, String originalLanguage, int length) {
+        return null;
+    }
+
+    public List<Movie> getMoviesByActor(Long actorId) {
+        return movieRepository.findByActorId(actorId).stream()
+                .map(movieMapper::toModel) // Konvertierung von MovieEntity zu Movie
+                .collect(Collectors.toList());
+    }
 }

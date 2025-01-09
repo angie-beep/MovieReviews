@@ -2,45 +2,44 @@ package de.moviereview.infrastructure.persistence.dao;
 
 import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import de.moviereview.infrastructure.persistence.entity.WatchlistEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
-public class WatchlistDaoImpl implements WatchlistDao{
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-    private EntityManager em = emf.createEntityManager();
+public class WatchlistDaoImpl extends BaseDao implements WatchlistDao {
 
+    @Override
     public WatchlistEntity read(long id) {
-        final WatchlistEntity result = em.find(WatchlistEntity.class, id);
-        return result;
+        return em.find(WatchlistEntity.class, id);
     }
 
-    public void update(WatchlistEntity watchlist){
+    @Override
+    public void updatePublic() {
+        // Implement logic for updating public field if needed
     }
 
-    public void updatePublic(){
-
+    @Override
+    public void addMovie(MovieEntity movie) {
+        beginTransaction();
+        em.merge(movie);
+        commitTransaction();
     }
 
-    public void addMovie(MovieEntity movie){
-
-    }
-
-    public void deleteMovie(long id) {
-        em.getTransaction().begin();
-        WatchlistEntity watchlist = em.find(WatchlistEntity.class, id);
+    @Override
+    public void deleteMovie(long watchlistId) {
+        beginTransaction();
+        WatchlistEntity watchlist = em.find(WatchlistEntity.class, watchlistId);
         if (watchlist != null) {
             em.remove(watchlist);
         }
-        em.getTransaction().commit();
+        commitTransaction();
     }
 
-    public void clearWatchlist(long watchlistId){
-
-    }
-
-    public void close() {
-        em.close();
-        emf.close();
+    @Override
+    public void clearWatchlist(long watchlistId) {
+        beginTransaction();
+        WatchlistEntity watchlist = em.find(WatchlistEntity.class, watchlistId);
+        if (watchlist != null) {
+            watchlist.getMovies().clear();
+            em.merge(watchlist);
+        }
+        commitTransaction();
     }
 }

@@ -3,7 +3,7 @@ package de.moviereview.infrastructure.persistence.entity;
 import jakarta.persistence.*;
 
 @Entity
-//@Table(name = "leaderboards")
+@Table(name = "leaderboards")
 public class LeaderboardEntity {
 
     @Id
