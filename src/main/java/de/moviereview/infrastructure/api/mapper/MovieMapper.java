@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class MovieMapper {
 
-    public Movie toModel(MovieEntity entity) {
+    public static Movie toModel(MovieEntity entity) {
         if (entity == null) {
             throw new IllegalArgumentException("MovieEntity cannot be null");
         }
@@ -62,7 +62,7 @@ public class MovieMapper {
         dto.setLength(model.getLength());
         dto.setOriginalLanguage(model.getOriginalLanguage());
         dto.setActorIds(model.getActors() != null ? model.getActors().stream().map(actor -> actor.getId()).collect(Collectors.toSet()) : null);
-        dto.setDirectorIds(model.getDirector() != null ? model.getDirector().stream().map(director -> director.getId()).collect(Collectors.toSet()) : null);
+        dto.setDirectorIds(model.getDirectors() != null ? model.getDirectors().stream().map(director -> director.getId()).collect(Collectors.toSet()) : null);
         dto.setReviewIds(model.getReviews() != null ? model.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()) : null);
         dto.setWatchlistIds(model.getWatchlist() != null ? model.getWatchlist().stream().map(watchlist -> watchlist.getId()).collect(Collectors.toSet()) : null);
         return dto;

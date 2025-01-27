@@ -6,7 +6,7 @@ import de.moviereview.infrastructure.persistence.entity.ReviewEntity;
 
 public class ReviewMapper {
 
-    public Review toModel(ReviewEntity entity) {
+    public static Review toModel(ReviewEntity entity) {
         if (entity == null) {
             throw new IllegalArgumentException("ReviewEntity cannot be null");
         }

@@ -1,8 +1,7 @@
 package de.moviereview.infrastructure.api.dto;
 
 //defines how actor data is represented in the API layer
-//right now same as actor model but provides a clean separation between the internal domain and the external API contract. Future changes to the model won’t impact the API if DTOs act as a buffer.
-//A simplified data transfer object used to transfer actor data between layers.
+//simple data transfer object for transfer actor data between layers.
 
 import java.time.LocalDate;
 import java.util.Set;

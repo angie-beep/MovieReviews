@@ -66,8 +66,7 @@ public class Actor {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setBirthday(LocalDate birthday) { this.birthday = birthday;
     }
 
     public String getHeritage() {
