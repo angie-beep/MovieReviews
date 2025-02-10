@@ -4,17 +4,21 @@ import de.moviereview.domain.model.Movie;
 import de.moviereview.infrastructure.persistence.entity.MovieEntity;
 import de.moviereview.infrastructure.persistence.repository.MovieRepository;
 import de.moviereview.infrastructure.api.mapper.MovieMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class MovieService {
 
     private final MovieRepository movieRepository;
     private final TMDbService tmdbService;
     private final MovieMapper movieMapper;
 
+    @Autowired
     public MovieService(MovieRepository movieRepository, TMDbService tmdbService, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
         this.tmdbService = tmdbService;

@@ -6,11 +6,15 @@ package de.moviereview.domain.service;
 import de.moviereview.domain.model.Actor;
 import de.moviereview.infrastructure.api.mapper.ActorMapper;
 import de.moviereview.infrastructure.persistence.repository.ActorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ActorService {
+    @Autowired
     private final ActorRepository actorRepository;
 
     public ActorService(ActorRepository actorRepository) {
@@ -34,6 +38,7 @@ public class ActorService {
     }
 
     public Actor addActor(String firstname, String lastname, String birthday, String heritage) {
+
         return null;
     }
 }
