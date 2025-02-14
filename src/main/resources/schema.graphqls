@@ -8,6 +8,8 @@ type Query {
 
     getAllMovies: [Movie!]!
 
+    hello: String
+
     getMoviesByActor(actorId: ID!): [Movie!]!
 
     getUserReviews(userId: ID!): [Review!]!
@@ -100,6 +102,7 @@ type Watchlist {
     user: User!
     movies: [Movie!]!
 }
+
 
 type Mutation {
     addActor(
