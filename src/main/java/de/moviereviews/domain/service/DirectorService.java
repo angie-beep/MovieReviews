@@ -2,7 +2,7 @@ package de.moviereviews.domain.service;
 
 import de.moviereviews.domain.exceptions.NotFoundException;
 import de.moviereviews.domain.model.Director;
-import de.moviereviews.infrastructure.api.mapper.DirectorMapper;
+import de.moviereviews.infrastructure.mapper.DirectorMapper;
 import de.moviereviews.infrastructure.persistence.entity.DirectorEntity;
 import de.moviereviews.infrastructure.persistence.repository.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

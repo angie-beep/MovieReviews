@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,9 +22,9 @@ public class WatchlistEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "watchlist_movie",
-        joinColumns = @JoinColumn(name = "watchlist_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
+            name = "watchlist_movie",
+            joinColumns = @JoinColumn(name = "watchlist_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     private Set<MovieEntity> movies;
 
@@ -34,6 +35,7 @@ public class WatchlistEntity {
     }
 
     public WatchlistEntity() {
+        this.movies = new HashSet<>();
     }
 
     public Long getId() {

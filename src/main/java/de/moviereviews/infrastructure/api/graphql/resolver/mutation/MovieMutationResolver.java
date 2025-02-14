@@ -1,10 +1,8 @@
 package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
-import de.moviereviews.domain.model.Director;
-import de.moviereviews.domain.model.Genre;
 import de.moviereviews.domain.model.Movie;
 import de.moviereviews.infrastructure.api.dto.MovieDTO;
-import de.moviereviews.infrastructure.api.mapper.MovieMapper;
+import de.moviereviews.infrastructure.mapper.MovieMapper;
 import de.moviereviews.domain.service.MovieService;
 import de.moviereviews.infrastructure.persistence.entity.ActorEntity;
 import de.moviereviews.infrastructure.persistence.entity.DirectorEntity;
@@ -13,7 +11,6 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Component

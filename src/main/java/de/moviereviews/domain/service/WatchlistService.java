@@ -2,7 +2,7 @@ package de.moviereviews.domain.service;
 
 import de.moviereviews.domain.exceptions.NotFoundException;
 import de.moviereviews.domain.model.Watchlist;
-import de.moviereviews.infrastructure.api.mapper.WatchlistMapper;
+import de.moviereviews.infrastructure.mapper.WatchlistMapper;
 import de.moviereviews.infrastructure.persistence.entity.MovieEntity;
 import de.moviereviews.infrastructure.persistence.entity.WatchlistEntity;
 import de.moviereviews.infrastructure.persistence.repository.MovieRepository;

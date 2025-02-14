@@ -51,6 +51,16 @@ public class Movie {
         this.watchlist = watchlist;
     }
 
+    public Movie(String title) {
+        this.title = title;
+        this.actors = new HashSet<>();
+        this.directors = new HashSet<>();
+        this.reviews = new HashSet<>();
+        this.watchlist = new HashSet<>();
+        this.genres = new HashSet<>();
+    }
+
+
 // Getters and Setters
 
     public Long getId() {

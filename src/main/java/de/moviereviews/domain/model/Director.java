@@ -37,6 +37,12 @@ public class Director {
         this.movies = movies;
     }
 
+    public Director(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.movies = new HashSet<>();
+    }
+
     public Long getId() {
         return id;
     }

@@ -6,8 +6,8 @@ import graphql.kickstart.servlet.GraphQLConfiguration;
 import graphql.kickstart.servlet.GraphQLHttpServlet;
 import graphql.kickstart.tools.SchemaParser;
 import graphql.schema.GraphQLSchema;
-import jakarta.servlet.annotation.WebServlet;
 import org.apache.commons.io.IOUtils;
+import jakarta.servlet.annotation.WebServlet;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 
@@ -17,6 +17,12 @@ public class GraphQLServlet extends GraphQLHttpServlet {
 
     private final MovieQueryResolver movieQueryResolver;
     private final MovieMutationResolver movieMutationResolver;
+    private final DirectorQueryResolver directorQueryResolver;
+    private final DirectorMutationResolver directorMutationResolver;
+    private final ActorQueryResolver actorQueryResolver;
+    private final ActorMutationResolver actorMutationResolver;
+    private final ReviewQueryResolver reviewQueryResolver;
+    private final ReviewMutationResolver reviewMutationResolver;
     private final UserQueryResolver userQueryResolver;
     private final UserMutationResolver userMutationResolver;
     private final WatchlistQueryResolver watchlistQueryResolver;
@@ -25,6 +31,12 @@ public class GraphQLServlet extends GraphQLHttpServlet {
     public GraphQLServlet(
             MovieQueryResolver movieQueryResolver,
             MovieMutationResolver movieMutationResolver,
+            DirectorQueryResolver directorQueryResolver,
+            DirectorMutationResolver directorMutationResolver,
+            ActorQueryResolver actorQueryResolver,
+            ActorMutationResolver actorMutationResolver,
+            ReviewQueryResolver reviewQueryResolver,
+            ReviewMutationResolver reviewMutationResolver,
             UserQueryResolver userQueryResolver,
             UserMutationResolver userMutationResolver,
             WatchlistQueryResolver watchlistQueryResolver,
@@ -32,12 +44,19 @@ public class GraphQLServlet extends GraphQLHttpServlet {
     ) {
         this.movieQueryResolver = movieQueryResolver;
         this.movieMutationResolver = movieMutationResolver;
+        this.directorQueryResolver = directorQueryResolver;
+        this.directorMutationResolver = directorMutationResolver;
+        this.actorQueryResolver = actorQueryResolver;
+        this.actorMutationResolver = actorMutationResolver;
+        this.reviewQueryResolver = reviewQueryResolver;
+        this.reviewMutationResolver = reviewMutationResolver;
         this.userQueryResolver = userQueryResolver;
         this.userMutationResolver = userMutationResolver;
         this.watchlistQueryResolver = watchlistQueryResolver;
         this.watchlistMutationResolver = watchlistMutationResolver;
 
         System.out.println("GraphQL Servlet gestartet!");
+
 
     }
 
@@ -59,6 +78,9 @@ public class GraphQLServlet extends GraphQLHttpServlet {
                     .schemaString(schemaString)
                     .resolvers(
                             movieQueryResolver, movieMutationResolver,
+                            directorQueryResolver, directorMutationResolver,
+                            actorQueryResolver, actorMutationResolver,
+                            reviewQueryResolver, reviewMutationResolver,
                             userQueryResolver, userMutationResolver,
                             watchlistQueryResolver, watchlistMutationResolver
                     )

@@ -1,0 +1,3 @@
+Start tests:
+mvn verify
+

@@ -3,7 +3,7 @@ package de.moviereviews.domain.service;
 import de.moviereviews.domain.model.Movie;
 import de.moviereviews.infrastructure.api.dto.MovieDTO;
 import de.moviereviews.infrastructure.api.dto.MoviePageDTO;
-import de.moviereviews.infrastructure.api.mapper.MovieMapper;
+import de.moviereviews.infrastructure.mapper.MovieMapper;
 import de.moviereviews.infrastructure.persistence.entity.ActorEntity;
 import de.moviereviews.infrastructure.persistence.entity.DirectorEntity;
 import de.moviereviews.infrastructure.persistence.entity.GenreEntity;
@@ -39,7 +39,7 @@ public class MovieService {
         MovieEntity entity = new MovieEntity();
         entity.setTitle(title);
         if (title != null && !title.isEmpty()) {
-            entity.setPublishingDate(LocalDate.parse(title));
+            entity.setPublishingDate(publishingDate);
         }
         entity.setOriginalLanguage(originalLanguage);
         entity.setLength(length);

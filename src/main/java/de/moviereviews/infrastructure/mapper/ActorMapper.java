@@ -1,4 +1,4 @@
-package de.moviereviews.infrastructure.api.mapper;
+package de.moviereviews.infrastructure.mapper;
 
 import de.moviereviews.domain.model.Actor;
 import de.moviereviews.domain.model.Movie;

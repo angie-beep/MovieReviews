@@ -1,7 +1,7 @@
 package de.moviereviews.domain.service;
 
 import de.moviereviews.domain.model.Review;
-import de.moviereviews.infrastructure.api.mapper.ReviewMapper;
+import de.moviereviews.infrastructure.mapper.ReviewMapper;
 import de.moviereviews.infrastructure.persistence.entity.ReviewEntity;
 import de.moviereviews.infrastructure.persistence.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;

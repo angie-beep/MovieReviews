@@ -1,4 +1,4 @@
-package de.moviereviews.infrastructure.api.mapper;
+package de.moviereviews.infrastructure.mapper;
 
 import de.moviereviews.domain.model.Watchlist;
 import de.moviereviews.infrastructure.persistence.entity.WatchlistEntity;

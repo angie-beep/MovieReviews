@@ -1,6 +1,7 @@
 package de.moviereviews.domain.model;
 
 import de.moviereviews.domain.service.MovieRankingService;
+import de.moviereviews.domain.service.MovieRankingServiceTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

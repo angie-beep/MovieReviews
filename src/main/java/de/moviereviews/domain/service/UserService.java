@@ -1,7 +1,7 @@
 package de.moviereviews.domain.service;
 
 import de.moviereviews.domain.model.User;
-import de.moviereviews.infrastructure.api.mapper.UserMapper;
+import de.moviereviews.infrastructure.mapper.UserMapper;
 import de.moviereviews.infrastructure.persistence.entity.UserEntity;
 import de.moviereviews.infrastructure.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

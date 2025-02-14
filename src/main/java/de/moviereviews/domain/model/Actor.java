@@ -39,6 +39,13 @@ public class Actor {
         this.movies = movies;
     }
 
+    public Actor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.movies = new HashSet<>();
+    }
+
+
     //getters and setters
     public Long getId() {
         return id;
