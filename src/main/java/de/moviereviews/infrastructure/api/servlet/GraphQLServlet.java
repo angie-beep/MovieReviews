@@ -10,12 +10,15 @@ import org.apache.commons.io.IOUtils;
 import jakarta.servlet.annotation.WebServlet;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Component
-@WebServlet(name = "GraphQLServlet", urlPatterns = {"/graphql/*"}, loadOnStartup = 1)
+@WebServlet(name = "GraphQLServlet", urlPatterns = {"/graphql" , "/graphql/*"}, loadOnStartup = 1)
 public class GraphQLServlet extends GraphQLHttpServlet {
 
     private final MovieQueryResolver movieQueryResolver;
+    private final QueryResolver queryResolver;
     private final MovieMutationResolver movieMutationResolver;
     private final DirectorQueryResolver directorQueryResolver;
     private final DirectorMutationResolver directorMutationResolver;
@@ -30,6 +33,7 @@ public class GraphQLServlet extends GraphQLHttpServlet {
 
     public GraphQLServlet(
             MovieQueryResolver movieQueryResolver,
+            QueryResolver queryResolver,
             MovieMutationResolver movieMutationResolver,
             DirectorQueryResolver directorQueryResolver,
             DirectorMutationResolver directorMutationResolver,
@@ -43,6 +47,7 @@ public class GraphQLServlet extends GraphQLHttpServlet {
             WatchlistMutationResolver watchlistMutationResolver
     ) {
         this.movieQueryResolver = movieQueryResolver;
+        this.queryResolver = queryResolver;
         this.movieMutationResolver = movieMutationResolver;
         this.directorQueryResolver = directorQueryResolver;
         this.directorMutationResolver = directorMutationResolver;
@@ -59,9 +64,6 @@ public class GraphQLServlet extends GraphQLHttpServlet {
 
 
     }
-
-
-
     @Override
     protected GraphQLConfiguration getConfiguration() {
 
@@ -70,14 +72,17 @@ public class GraphQLServlet extends GraphQLHttpServlet {
 
     private GraphQLSchema createSchema() {
         try {
-            final String schemaString = IOUtils.toString(
-                    this.getClass().getResourceAsStream("/schema.graphqls")
-            );
-
+            InputStream schemaStream = this.getClass().getResourceAsStream("/graphql/schema.graphqls");
+            if (schemaStream == null) {
+                throw new RuntimeException("schema.graphqls not found in classpath");
+            }
+            final String schemaString = IOUtils.toString(schemaStream, StandardCharsets.UTF_8);
+            System.out.println("Loaded schema: " + schemaString);
             return SchemaParser.newParser()
                     .schemaString(schemaString)
                     .resolvers(
-                            movieQueryResolver, movieMutationResolver,
+                            movieQueryResolver, queryResolver,
+                            movieMutationResolver,
                             directorQueryResolver, directorMutationResolver,
                             actorQueryResolver, actorMutationResolver,
                             reviewQueryResolver, reviewMutationResolver,
@@ -88,8 +93,9 @@ public class GraphQLServlet extends GraphQLHttpServlet {
                     .makeExecutableSchema();
         } catch (final IOException e) {
             e.printStackTrace();
-            return null;
+            throw new RuntimeException("Error while loading schema", e);
         }
     }
+
 }
 

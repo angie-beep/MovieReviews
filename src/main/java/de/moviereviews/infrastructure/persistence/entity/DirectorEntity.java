@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "directors")
@@ -90,7 +92,7 @@ public class DirectorEntity {
     }
 
     public List<MovieEntity> getTop3Movies() {
-        // Placeholder: Returning an empty list for now
-        return new ArrayList<>();
+        return movies.stream() .sorted(Comparator.comparingDouble(MovieEntity::getOverallRating).reversed())
+                .limit(3) .collect(Collectors.toList());
     }
 }

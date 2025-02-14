@@ -1,6 +1,7 @@
 package de.moviereviews.infrastructure.api.dto;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class ActorDTO {
     private Long id;
@@ -8,6 +9,7 @@ public class ActorDTO {
     private String lastName;
     private String birthday; // Format "YYYY-MM-DD"
     private String heritage;
+    private Set<MovieDTO> movies;
 
     public ActorDTO() {
     }
@@ -42,4 +44,7 @@ public class ActorDTO {
     public void setHeritage(String heritage) {
         this.heritage = heritage;
     }
+
+    public Set<MovieDTO> getMovies() { return this.movies; }
+    public void setMovies ( Set<MovieDTO> movies ) {this.movies = movies; }
 }

@@ -4,19 +4,17 @@ type Query {
         genre: String,
         directorId: ID,
         originalLanguage: String
+        page: Int
+        size: Int
     ): [Movie!]!
-
     getAllMovies: [Movie!]!
+    getMoviesByActor(actorId: ID!): [Movie!]!
+    getLeaderboard(genre: String): [Movie!]!
 
     hello: String
 
-    getMoviesByActor(actorId: ID!): [Movie!]!
-
     getUserReviews(userId: ID!): [Review!]!
-
     getReviewsByMovieId(movieId: ID!): [Review!]!
-
-    getLeaderboard(genre: String): [Movie!]!
 
     getDirectors: [Director!]!
     getDirectorById(id: ID!): Director
@@ -73,6 +71,7 @@ type Movie {
     releaseDate: String!
     directors: [Director!]
     originalLanguage: String!
+    summary: String!
     rating: Float
     length: Int
     reviews: [Review!]!
@@ -130,6 +129,7 @@ type Mutation {
         rating: Int,
         comment: String
     ): Review
+
     deleteReview(id: ID!): Boolean
 
 

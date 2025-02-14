@@ -5,7 +5,7 @@ import java.util.List;
 public class WatchlistDTO {
     private Long id;
     private Boolean isPublic;
-    private UserDTO user;  // Optional: Wenn du Benutzerinformationen mitliefern möchtest
+    private UserDTO user;
     private List<MovieDTO> movies;
 
     public WatchlistDTO() {

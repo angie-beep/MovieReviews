@@ -25,7 +25,7 @@ public class ActorMapper {
         dto.setId(actor.getId());
         dto.setFirstName(actor.getFirstName());
         dto.setLastName(actor.getLastName());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dto.setBirthday(actor.getBirthday().toString());
         dto.setHeritage(actor.getHeritage());
         return dto;

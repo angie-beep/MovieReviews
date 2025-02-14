@@ -4,10 +4,8 @@ package de.moviereviews.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -86,7 +84,8 @@ public class ActorEntity {
     }
 
     public List<MovieEntity> getTop3Movies() {
-        // Placeholder: Returning an empty list for now
-        return new ArrayList<>();
+        return movies.stream() .sorted(Comparator.comparingDouble(MovieEntity::getOverallRating)
+                .reversed()) .limit(3) .collect(Collectors.toList());
+
     }
 }

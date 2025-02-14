@@ -2,8 +2,11 @@ package de.moviereviews.infrastructure.api.dto;
 
 public class ReviewDTO {
     private Long id;
-    private Long movieId;
-    private Long userId;
+
+    private MovieDTO movie;
+
+
+    private UserDTO user;
     private Integer rating;
     private String comment;
     private String createdAt; // Format z. B. ISO-8601
@@ -18,18 +21,24 @@ public class ReviewDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getMovieId() {
-        return movieId;
+
+    public MovieDTO getMovie() {
+        return movie;
     }
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+
+    public void setMovie(MovieDTO movie) {
+        this.movie = movie;
     }
-    public Long getUserId() {
-        return userId;
+
+    public UserDTO getUser() {
+        return user;
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
+
+
     public Integer getRating() {
         return rating;
     }
