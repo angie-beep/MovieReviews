@@ -4,6 +4,7 @@ import de.moviereviews.domain.exceptions.NotFoundException;
 import de.moviereviews.domain.model.Watchlist;
 import de.moviereviews.infrastructure.mapper.WatchlistMapper;
 import de.moviereviews.infrastructure.persistence.entity.MovieEntity;
+import de.moviereviews.infrastructure.persistence.entity.UserEntity;
 import de.moviereviews.infrastructure.persistence.entity.WatchlistEntity;
 import de.moviereviews.infrastructure.persistence.repository.MovieRepository;
 import de.moviereviews.infrastructure.persistence.repository.WatchlistRepository;
@@ -15,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +25,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class WatchlistServiceTest {
+
+
 
     @Mock
     private WatchlistRepository watchlistRepository;
@@ -41,6 +45,15 @@ class WatchlistServiceTest {
         watchlistEntity = new WatchlistEntity();
         watchlistEntity.setId(1L);
         watchlistEntity.setPublic(true);
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        userEntity.setUsername("testUser");
+        userEntity.setEmail("test@example.com");
+        watchlistEntity.setUser(userEntity);
+
+        // Stelle sicher, dass die Filme-Collection nicht null ist (leere Menge reicht)
+        watchlistEntity.setMovies(new HashSet<>());
 
         watchlist = WatchlistMapper.toDomain(watchlistEntity);
     }

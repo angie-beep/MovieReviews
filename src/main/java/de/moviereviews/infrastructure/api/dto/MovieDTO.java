@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.api.dto;
 
 import de.moviereviews.domain.model.Genre;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class MovieDTO {
@@ -28,6 +29,10 @@ public class MovieDTO {
 
     // Standard-Konstruktor
     public MovieDTO() {
+        this.genres = new HashSet<>();
+        this.directors = new HashSet<>();
+        this.reviews = new HashSet<>();
+        this.actors = new HashSet<>();
     }
 
     // Getter und Setter

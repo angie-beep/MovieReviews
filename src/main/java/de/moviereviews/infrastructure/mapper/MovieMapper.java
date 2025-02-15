@@ -4,6 +4,8 @@ import de.moviereviews.domain.model.Movie;
 import de.moviereviews.infrastructure.persistence.entity.MovieEntity;
 import de.moviereviews.infrastructure.api.dto.MovieDTO;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public class MovieMapper {
 
@@ -32,6 +34,21 @@ public class MovieMapper {
         dto.setLength(movie.getLength());
         dto.setOriginalLanguage(movie.getOriginalLanguage());
         dto.setPublishingDate(movie.getPublishingDate() != null ? movie.getPublishingDate().format(FORMATTER) : null);
+        dto.setGenres(movie.getGenres() != null
+                ? movie.getGenres().stream().map(GenreMapper::toDTO).collect(Collectors.toSet())
+                : new HashSet<>());
+
+        dto.setDirectors(movie.getDirectors() != null
+                ? movie.getDirectors().stream().map(DirectorMapper::toDTO).collect(Collectors.toSet())
+                : new HashSet<>());
+
+        dto.setActors(movie.getActors() != null
+                ? movie.getActors().stream().map(ActorMapper::toDTO).collect(Collectors.toSet())
+                : new HashSet<>());
+
+        dto.setReviews(movie.getReviews() != null
+                ? movie.getReviews().stream().map(ReviewMapper::toDTO).collect(Collectors.toSet())
+                : new HashSet<>());
         return dto;
     }
 
