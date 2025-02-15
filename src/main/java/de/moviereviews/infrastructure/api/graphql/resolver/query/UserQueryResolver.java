@@ -11,21 +11,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import de.moviereviews.infrastructure.api.dto.UserDTO;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.stereotype.Controller;
 
-@Component
-public class UserQueryResolver implements GraphQLQueryResolver {
+@Controller
+public class UserQueryResolver{
 
     private final UserService userService;
 
     public UserQueryResolver(UserService userService) {
         this.userService = userService;
     }
-
+    @QueryMapping
     public UserDTO getUserById(Long id) {
 
         return UserMapper.toDTO(userService.getUserById(id));
     }
-
+    @QueryMapping
     public List<UserDTO> getAllUsers() {
         List<User> user = userService.getAllUsers();
         return  user.stream()
