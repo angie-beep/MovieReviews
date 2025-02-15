@@ -72,7 +72,7 @@ public class GraphQLServlet extends GraphQLHttpServlet {
 
     private GraphQLSchema createSchema() {
         try {
-            InputStream schemaStream = this.getClass().getResourceAsStream("/graphql/schema.graphqls");
+            InputStream schemaStream = this.getClass().getResourceAsStream("/schema.graphqls");
             if (schemaStream == null) {
                 throw new RuntimeException("schema.graphqls not found in classpath");
             }
