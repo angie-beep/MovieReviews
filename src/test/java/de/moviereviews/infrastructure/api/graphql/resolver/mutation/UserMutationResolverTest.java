@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
 import de.moviereviews.domain.model.User;
 import de.moviereviews.domain.service.UserService;
+import de.moviereviews.infrastructure.api.dto.UserDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +33,7 @@ class UserMutationResolverTest {
                 .thenReturn(user);
 
         // Act
-        User result = userMutationResolver.createUser("John Doe", "john.doe@example.com");
+        UserDTO result = userMutationResolver.createUser("John Doe", "john.doe@example.com");
 
         // Assert
         assertNotNull(result);
@@ -55,7 +56,7 @@ class UserMutationResolverTest {
                 .thenReturn(user);
 
         // Act
-        User result = userMutationResolver.updateUser(1L, "Updated User", "updated@example.com");
+        UserDTO result = userMutationResolver.updateUser(1L, "Updated User", "updated@example.com");
 
         // Assert
         assertNotNull(result);

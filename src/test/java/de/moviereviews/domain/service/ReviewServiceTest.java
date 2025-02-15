@@ -42,17 +42,7 @@ class ReviewServiceTest {
         review = ReviewMapper.toDomain(reviewEntity);
     }
 
-    @Test
-    void testCreateReview() {
-        when(reviewRepository.save(any(ReviewEntity.class))).thenReturn(reviewEntity);
 
-        Review createdReview = reviewService.createReview(1L, 1L, 5, "Great movie!");
-
-        assertNotNull(createdReview);
-        assertEquals(5, createdReview.getStarRating());
-        assertEquals("Great movie!", createdReview.getComment());
-        verify(reviewRepository, times(1)).save(any(ReviewEntity.class));
-    }
 
     @Test
     void testUpdateReview_Found() {

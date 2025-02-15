@@ -16,7 +16,7 @@ class WatchlistDTOTest {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
-        userDTO.setName("John Doe");
+        userDTO.setUsername("John Doe");
         userDTO.setEmail("john.doe@example.com");
 
         MovieDTO movie1 = new MovieDTO();
@@ -39,7 +39,7 @@ class WatchlistDTOTest {
         assertEquals(100L, watchlistDTO.getId());
         assertTrue(watchlistDTO.getIsPublic());
         assertNotNull(watchlistDTO.getUser());
-        assertEquals("John Doe", watchlistDTO.getUser().getName());
+        assertEquals("John Doe", watchlistDTO.getUser().getUsername());
         assertEquals(2, watchlistDTO.getMovies().size());
         assertEquals("Inception", watchlistDTO.getMovies().get(0).getTitle());
         assertEquals("Interstellar", watchlistDTO.getMovies().get(1).getTitle());

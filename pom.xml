@@ -24,7 +24,15 @@
         <java.version>17</java.version>
     </properties>
 
+
     <dependencies>
+
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>15.0</version>
+        </dependency>
+
         <!-- Spring Boot Starter for JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,7 +63,7 @@
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-java-tools</artifactId>
-            <version>13.1.1</version>
+            <version>11.1.0</version>
         </dependency>
 
         <!-- Apache Commons IO (zum Einlesen von Dateien, z. B. schema.graphqls) -->

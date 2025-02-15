@@ -7,13 +7,13 @@ import java.util.Set;
 public class MovieDTO {
     private Long id;
     private String title;
-    private GenreDTO genre;
+    private Set<GenreDTO> genres;
 
     private Set<DirectorDTO> directors;
-    private String releaseDate; // Als String, evtl. formatiert (z. B. "YYYY-MM-DD")
+    private String publishingDate; // Als String, evtl. formatiert (z. B. "YYYY-MM-DD")
     private String summary;
     private String trailer;
-    private Float rating;
+    private Float overallRating;
     private Integer length;
     private String originalLanguage;
 
@@ -43,12 +43,12 @@ public class MovieDTO {
     public void setTitle(String title) {
         this.title = title;
     }
-    public GenreDTO getGenre() {
-        return genre;
+    public Set<GenreDTO> getGenres() {
+        return genres;
     }
 
-    public void setGenre(GenreDTO genre) {
-        this.genre = genre;
+    public void setGenres(Set<GenreDTO> genres) {
+        this.genres = genres;
     }
 
     public Set<DirectorDTO> getDirectors() {
@@ -74,11 +74,11 @@ public class MovieDTO {
         this.actors = actors;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getPublishingDate() {
+        return publishingDate;
     }
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setPublishingDate(String publishingDate) {
+        this.publishingDate = publishingDate;
     }
     public String getSummary() {
         return summary;
@@ -92,11 +92,11 @@ public class MovieDTO {
     public void setTrailer(String trailer) {
         this.trailer = trailer;
     }
-    public Float getRating() {
-        return rating;
+    public Float getOverallRating() {
+        return overallRating;
     }
-    public void setRating(Float rating) {
-        this.rating = rating;
+    public void setOverallRating(Float rating) {
+        this.overallRating = rating;
     }
     public Integer getLength() {
         return length;

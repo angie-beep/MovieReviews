@@ -51,10 +51,10 @@ class MovieMutationResolverTest {
         // Assert
         assertNotNull(result);
         assertEquals("Inception", result.getTitle());
-        assertEquals("2010-07-16", result.getReleaseDate());
+        assertEquals("2010-07-16", result.getPublishingDate());
         assertEquals("English", result.getOriginalLanguage());
         assertEquals(148, result.getLength());
-        assertEquals(8.8f, result.getRating());
+        assertEquals(8.8f, result.getOverallRating());
 
         verify(movieService, times(1)).addMovie("Inception", genres, LocalDate.of(2010, 7, 16), directors, actors, "English", 148, 8.8f);
     }
@@ -82,10 +82,10 @@ class MovieMutationResolverTest {
         // Assert
         assertNotNull(result);
         assertEquals("Interstellar", result.getTitle());
-        assertEquals("2014-11-07", result.getReleaseDate());
+        assertEquals("2014-11-07", result.getPublishingDate());
         assertEquals("English", result.getOriginalLanguage());
         assertEquals(169, result.getLength());
-        assertEquals(8.6f, result.getRating());
+        assertEquals(8.6f, result.getOverallRating());
 
         verify(movieService, times(1)).updateMovie(1L, "Interstellar", genres, LocalDate.of(2014, 11, 7), directors, actors, "English", 169, 8.6f);
     }

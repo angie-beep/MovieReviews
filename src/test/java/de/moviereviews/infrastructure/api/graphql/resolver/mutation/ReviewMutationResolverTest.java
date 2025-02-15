@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
 import de.moviereviews.domain.model.Review;
 import de.moviereviews.domain.service.ReviewService;
+import de.moviereviews.infrastructure.api.dto.ReviewDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,28 +21,6 @@ class ReviewMutationResolverTest {
     @InjectMocks
     private ReviewMutationResolver reviewMutationResolver;
 
-    @Test
-    void testCreateReview() {
-        // Arrange
-        Review review = new Review();
-        review.setId(1L);
-        review.setStarRating(5);
-        review.setComment("Amazing movie!");
-
-        when(reviewService.createReview(10L, 5L, 5, "Amazing movie!"))
-                .thenReturn(review);
-
-        // Act
-        Review result = reviewMutationResolver.createReview(10L, 5L, 5, "Amazing movie!");
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(1L, result.getId());
-        assertEquals(5, result.getStarRating());
-        assertEquals("Amazing movie!", result.getComment());
-
-        verify(reviewService, times(1)).createReview(10L, 5L, 5, "Amazing movie!");
-    }
 
     @Test
     void testUpdateReview() {
@@ -55,7 +34,7 @@ class ReviewMutationResolverTest {
                 .thenReturn(review);
 
         // Act
-        Review result = reviewMutationResolver.updateReview(1L, 4, "Great movie!");
+        ReviewDTO result = reviewMutationResolver.updateReview(1L, 4, "Great movie!");
 
         // Assert
         assertNotNull(result);

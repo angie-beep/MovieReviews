@@ -2,6 +2,8 @@ package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
 import de.moviereviews.domain.model.User;
 import de.moviereviews.domain.service.UserService;
+import de.moviereviews.infrastructure.api.dto.UserDTO;
+import de.moviereviews.infrastructure.mapper.UserMapper;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +16,14 @@ public class UserMutationResolver implements GraphQLMutationResolver {
         this.userService = userService;
     }
 
-    public User createUser(String name, String email) {
-        return userService.createUser(name, email);
+    public UserDTO createUser(String name, String email) {
+
+        return UserMapper.toDTO(userService.createUser(name, email));
     }
 
-    public User updateUser(Long id, String name, String email) {
-        return userService.updateUser(id, name, email);
+    public UserDTO updateUser(Long id, String name, String email) {
+
+        return UserMapper.toDTO(userService.updateUser(id, name, email));
     }
 
     public Boolean deleteUser(Long id) {

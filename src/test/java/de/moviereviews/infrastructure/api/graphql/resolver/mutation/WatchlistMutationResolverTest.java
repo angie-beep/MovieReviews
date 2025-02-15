@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
 import de.moviereviews.domain.model.Watchlist;
 import de.moviereviews.domain.service.WatchlistService;
+import de.moviereviews.infrastructure.api.dto.WatchlistDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,12 +32,12 @@ class WatchlistMutationResolverTest {
                 .thenReturn(watchlist);
 
         // Act
-        Watchlist result = watchlistMutationResolver.createWatchlist(5L, true);
+        WatchlistDTO result = watchlistMutationResolver.createWatchlist(5L, true);
 
         // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        assertTrue(result.isPublic());
+        assertTrue(result.getIsPublic());
 
         verify(watchlistService, times(1)).createWatchlist(5L, true);
     }
@@ -51,7 +52,7 @@ class WatchlistMutationResolverTest {
                 .thenReturn(watchlist);
 
         // Act
-        Watchlist result = watchlistMutationResolver.addMovieToWatchlist(1L, 10L);
+        WatchlistDTO result = watchlistMutationResolver.addMovieToWatchlist(1L, 10L);
 
         // Assert
         assertNotNull(result);
@@ -70,7 +71,7 @@ class WatchlistMutationResolverTest {
                 .thenReturn(watchlist);
 
         // Act
-        Watchlist result = watchlistMutationResolver.removeMovieFromWatchlist(1L, 10L);
+        WatchlistDTO result = watchlistMutationResolver.removeMovieFromWatchlist(1L, 10L);
 
         // Assert
         assertNotNull(result);
@@ -90,12 +91,12 @@ class WatchlistMutationResolverTest {
                 .thenReturn(watchlist);
 
         // Act
-        Watchlist result = watchlistMutationResolver.setWatchlistPublicity(1L, false);
+        WatchlistDTO result = watchlistMutationResolver.setWatchlistPublicity(1L, false);
 
         // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        assertFalse(result.isPublic());
+        assertFalse(result.getIsPublic());
 
         verify(watchlistService, times(1)).setWatchlistPublicity(1L, false);
     }

@@ -14,20 +14,20 @@ class MovieDTOTest {
         // Act
         movieDTO.setId(1L);
         movieDTO.setTitle("Inception");
-        movieDTO.setReleaseDate("2010-07-16");
+        movieDTO.setPublishingDate("2010-07-16");
         movieDTO.setSummary("A mind-bending thriller about dreams within dreams.");
         movieDTO.setTrailer("https://example.com/trailer");
-        movieDTO.setRating(8.8f);
+        movieDTO.setOverallRating(8.8f);
         movieDTO.setLength(148);
         movieDTO.setOriginalLanguage("English");
 
         // Assert
         assertEquals(1L, movieDTO.getId());
         assertEquals("Inception", movieDTO.getTitle());
-        assertEquals("2010-07-16", movieDTO.getReleaseDate());
+        assertEquals("2010-07-16", movieDTO.getPublishingDate());
         assertEquals("A mind-bending thriller about dreams within dreams.", movieDTO.getSummary());
         assertEquals("https://example.com/trailer", movieDTO.getTrailer());
-        assertEquals(8.8f, movieDTO.getRating());
+        assertEquals(8.8f, movieDTO.getOverallRating());
         assertEquals(148, movieDTO.getLength());
         assertEquals("English", movieDTO.getOriginalLanguage());
     }
@@ -41,10 +41,10 @@ class MovieDTOTest {
         assertNotNull(movieDTO);
         assertNull(movieDTO.getId());
         assertNull(movieDTO.getTitle());
-        assertNull(movieDTO.getReleaseDate());
+        assertNull(movieDTO.getPublishingDate());
         assertNull(movieDTO.getSummary());
         assertNull(movieDTO.getTrailer());
-        assertNull(movieDTO.getRating());
+        assertNull(movieDTO.getOverallRating());
         assertNull(movieDTO.getLength());
         assertNull(movieDTO.getOriginalLanguage());
     }

@@ -2,6 +2,8 @@ package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
 import de.moviereviews.domain.model.Watchlist;
 import de.moviereviews.domain.service.WatchlistService;
+import de.moviereviews.infrastructure.api.dto.WatchlistDTO;
+import de.moviereviews.infrastructure.mapper.WatchlistMapper;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 
@@ -14,20 +16,20 @@ public class WatchlistMutationResolver implements GraphQLMutationResolver {
         this.watchlistService = watchlistService;
     }
 
-    public Watchlist createWatchlist(Long userId, Boolean isPublic) {
-        return watchlistService.createWatchlist(userId, isPublic);
+    public WatchlistDTO createWatchlist(Long userId, Boolean isPublic) {
+        return WatchlistMapper.toDTO(watchlistService.createWatchlist(userId, isPublic));
     }
 
-    public Watchlist addMovieToWatchlist(Long watchlistId, Long movieId) {
-        return watchlistService.addMovieToWatchlist(watchlistId, movieId);
+    public WatchlistDTO addMovieToWatchlist(Long watchlistId, Long movieId) {
+        return WatchlistMapper.toDTO(watchlistService.addMovieToWatchlist(watchlistId, movieId));
     }
 
-    public Watchlist removeMovieFromWatchlist(Long watchlistId, Long movieId) {
-        return watchlistService.removeMovieFromWatchlist(watchlistId, movieId);
+    public WatchlistDTO removeMovieFromWatchlist(Long watchlistId, Long movieId) {
+        return WatchlistMapper.toDTO(watchlistService.removeMovieFromWatchlist(watchlistId, movieId));
     }
 
-    public Watchlist setWatchlistPublicity(Long watchlistId, Boolean isPublic) {
-        return watchlistService.setWatchlistPublicity(watchlistId, isPublic);
+    public WatchlistDTO setWatchlistPublicity(Long watchlistId, Boolean isPublic) {
+        return WatchlistMapper.toDTO(watchlistService.setWatchlistPublicity(watchlistId, isPublic));
     }
 
     public Boolean deleteWatchlist(Long id) {

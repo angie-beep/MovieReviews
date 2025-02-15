@@ -39,10 +39,10 @@ public class ReviewDTO {
     }
 
 
-    public Integer getRating() {
+    public Integer getStarRating() {
         return rating;
     }
-    public void setRating(Integer rating) {
+    public void setStarRating(Integer rating) {
         this.rating = rating;
     }
     public String getComment() {

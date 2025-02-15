@@ -28,10 +28,24 @@ public class MovieMapper {
         dto.setTitle(movie.getTitle());
         dto.setSummary(movie.getSummary());
         dto.setTrailer(movie.getTrailer());
-        dto.setRating(movie.getOverallRating());
+        dto.setOverallRating(movie.getOverallRating());
         dto.setLength(movie.getLength());
         dto.setOriginalLanguage(movie.getOriginalLanguage());
-        dto.setReleaseDate(movie.getPublishingDate() != null ? movie.getPublishingDate().format(FORMATTER) : null);
+        dto.setPublishingDate(movie.getPublishingDate() != null ? movie.getPublishingDate().format(FORMATTER) : null);
         return dto;
     }
+
+    public static MovieEntity toEntity(Movie movie) {
+        MovieEntity entity = new MovieEntity();
+        entity.setId(movie.getId());
+        entity.setTitle(movie.getTitle());
+        entity.setSummary(movie.getSummary());
+        entity.setTrailer(movie.getTrailer());
+        entity.setOverallRating(movie.getOverallRating());
+        entity.setPublishingDate(movie.getPublishingDate());
+        entity.setLength(movie.getLength());
+        entity.setOriginalLanguage(movie.getOriginalLanguage());
+        return entity;
+    }
+
 }

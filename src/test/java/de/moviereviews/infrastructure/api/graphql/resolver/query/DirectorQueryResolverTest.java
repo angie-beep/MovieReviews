@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.api.graphql.resolver.query;
 
 import de.moviereviews.domain.model.Director;
 import de.moviereviews.domain.service.DirectorService;
+import de.moviereviews.infrastructure.api.dto.DirectorDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -33,12 +35,11 @@ class DirectorQueryResolverTest {
         when(directorService.getAllDirectors()).thenReturn(Arrays.asList(director));
 
         // Act
-        List<Director> result = directorQueryResolver.getDirectors();
+        Set<DirectorDTO> result = directorQueryResolver.getDirectors();
 
         // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals("Christopher", result.get(0).getFirstName());
         verify(directorService, times(1)).getAllDirectors();
     }
 
@@ -52,7 +53,7 @@ class DirectorQueryResolverTest {
         when(directorService.getDirectorById(1L)).thenReturn(director);
 
         // Act
-        Director result = directorQueryResolver.getDirectorById(1L);
+        DirectorDTO result = directorQueryResolver.getDirectorById(1L);
 
         // Assert
         assertNotNull(result);

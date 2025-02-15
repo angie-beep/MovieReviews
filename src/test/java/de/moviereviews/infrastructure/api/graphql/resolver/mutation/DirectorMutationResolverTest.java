@@ -2,6 +2,8 @@ package de.moviereviews.infrastructure.api.graphql.resolver.mutation;
 
 import de.moviereviews.domain.model.Director;
 import de.moviereviews.domain.service.DirectorService;
+import de.moviereviews.infrastructure.api.dto.DirectorDTO;
+import de.moviereviews.infrastructure.mapper.DirectorMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,13 +37,13 @@ class DirectorMutationResolverTest {
                 .thenReturn(director);
 
         // Act
-        Director result = directorMutationResolver.addDirector("Christopher", "Nolan", "1970-07-30", "British");
+        DirectorDTO result = directorMutationResolver.addDirector("Christopher", "Nolan", "1970-07-30", "British");
 
         // Assert
         assertNotNull(result);
         assertEquals("Christopher", result.getFirstName());
         assertEquals("Nolan", result.getLastName());
-        assertEquals(LocalDate.parse("1970-07-30"), result.getBirthday());
+        assertEquals("1970-07-30", result.getBirthday());
         assertEquals("British", result.getHeritage());
 
         verify(directorService, times(1)).addDirector("Christopher", "Nolan", "1970-07-30", "British");

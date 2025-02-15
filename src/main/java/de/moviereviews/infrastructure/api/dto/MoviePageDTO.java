@@ -15,8 +15,12 @@ public class MoviePageDTO {
     public List<MovieDTO> getContent() {
         return content;
     }
+    public List<MovieDTO> getMovies() { return content; }
     public void setContent(List<MovieDTO> content) {
         this.content = content;
+    }
+    public void setMovies(List<MovieDTO> movies) {
+        this.content = movies;
     }
     public long getTotalElements() {
         return totalElements;

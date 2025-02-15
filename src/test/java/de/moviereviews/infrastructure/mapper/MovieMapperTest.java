@@ -62,9 +62,9 @@ class MovieMapperTest {
         assertEquals("Inception", dto.getTitle());
         assertEquals("A dream within a dream.", dto.getSummary());
         assertEquals("https://example.com/trailer", dto.getTrailer());
-        assertEquals(8.8f, dto.getRating());
+        assertEquals(8.8f, dto.getOverallRating());
         assertEquals(148, dto.getLength());
         assertEquals("English", dto.getOriginalLanguage());
-        assertEquals("2010-07-16", dto.getReleaseDate()); // Prüft die korrekte Formatierung des Datums
+        assertEquals("2010-07-16", dto.getPublishingDate()); // Prüft die korrekte Formatierung des Datums
     }
 }

@@ -13,12 +13,12 @@ class UserDTOTest {
 
         // Act
         userDTO.setId(1L);
-        userDTO.setName("John Doe");
+        userDTO.setUsername("John Doe");
         userDTO.setEmail("john.doe@example.com");
 
         // Assert
         assertEquals(1L, userDTO.getId());
-        assertEquals("John Doe", userDTO.getName());
+        assertEquals("John Doe", userDTO.getUsername());
         assertEquals("john.doe@example.com", userDTO.getEmail());
     }
 
@@ -30,7 +30,7 @@ class UserDTOTest {
         // Assert
         assertNotNull(userDTO);
         assertNull(userDTO.getId());
-        assertNull(userDTO.getName());
+        assertNull(userDTO.getUsername());
         assertNull(userDTO.getEmail());
     }
 }

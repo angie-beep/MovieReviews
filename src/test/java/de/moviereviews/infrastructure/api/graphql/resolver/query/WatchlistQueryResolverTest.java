@@ -2,6 +2,7 @@ package de.moviereviews.infrastructure.api.graphql.resolver.query;
 
 import de.moviereviews.domain.model.Watchlist;
 import de.moviereviews.domain.service.WatchlistService;
+import de.moviereviews.infrastructure.api.dto.WatchlistDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,12 +34,12 @@ class WatchlistQueryResolverTest {
         when(watchlistService.getWatchlistById(1L)).thenReturn(watchlist);
 
         // Act
-        Watchlist result = watchlistQueryResolver.getWatchlistById(1L);
+        WatchlistDTO result = watchlistQueryResolver.getWatchlistById(1L);
 
         // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        assertTrue(result.isPublic());
+        assertTrue(result.getIsPublic());
 
         verify(watchlistService, times(1)).getWatchlistById(1L);
     }
@@ -52,12 +53,12 @@ class WatchlistQueryResolverTest {
         when(watchlistService.getAllWatchlists()).thenReturn(Arrays.asList(watchlist));
 
         // Act
-        List<Watchlist> result = watchlistQueryResolver.getAllWatchlists();
+        List<WatchlistDTO> result = watchlistQueryResolver.getAllWatchlists();
 
         // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertTrue(result.get(0).isPublic());
+        assertTrue(result.get(0).getIsPublic());
 
         verify(watchlistService, times(1)).getAllWatchlists();
     }
@@ -71,12 +72,12 @@ class WatchlistQueryResolverTest {
         when(watchlistService.getPublicWatchlists()).thenReturn(Arrays.asList(watchlist));
 
         // Act
-        List<Watchlist> result = watchlistQueryResolver.getPublicWatchlists();
+        List<WatchlistDTO> result = watchlistQueryResolver.getPublicWatchlists();
 
         // Assert
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertTrue(result.get(0).isPublic());
+        assertTrue(result.get(0).getIsPublic());
 
         verify(watchlistService, times(1)).getPublicWatchlists();
     }

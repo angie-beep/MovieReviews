@@ -2,7 +2,9 @@ package de.moviereviews.domain.service;
 
 import de.moviereviews.domain.model.Review;
 import de.moviereviews.infrastructure.mapper.ReviewMapper;
+import de.moviereviews.infrastructure.persistence.entity.MovieEntity;
 import de.moviereviews.infrastructure.persistence.entity.ReviewEntity;
+import de.moviereviews.infrastructure.persistence.entity.UserEntity;
 import de.moviereviews.infrastructure.persistence.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,8 +24,9 @@ public class ReviewService {
     }
 
 
-    public Review createReview(Long movieId, Long userId, int rating, String comment) {
+    public Review createReview(MovieEntity movie, UserEntity user, int rating, String comment) {
         ReviewEntity entity = new ReviewEntity();
+        entity.setMovie(movie);
         entity.setStarRating(rating);
         entity.setComment(comment);
         entity.setCreatedAt(LocalDateTime.now());

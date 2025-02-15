@@ -1,10 +1,16 @@
 package de.moviereviews.infrastructure.api.graphql.resolver.query;
 
+import de.moviereviews.domain.model.Actor;
+import de.moviereviews.infrastructure.api.dto.DirectorDTO;
+import de.moviereviews.infrastructure.mapper.ActorMapper;
+import de.moviereviews.infrastructure.mapper.DirectorMapper;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import de.moviereviews.domain.model.Director;
 import de.moviereviews.domain.service.DirectorService;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class DirectorQueryResolver implements GraphQLQueryResolver {
@@ -15,11 +21,14 @@ public class DirectorQueryResolver implements GraphQLQueryResolver {
         this.directorService = directorService;
     }
 
-    public List<Director> getDirectors() {
-        return directorService.getAllDirectors();
+    public Set<DirectorDTO> getDirectors() {
+        List<Director> directors = directorService.getAllDirectors();
+        return directors.stream()
+                .map(DirectorMapper::toDTO)
+                .collect(Collectors.toSet());
     }
 
-    public Director getDirectorById(Long id) {
-        return directorService.getDirectorById(id);
+    public DirectorDTO getDirectorById(Long id) {
+        return DirectorMapper.toDTO(directorService.getDirectorById(id));
     }
 }

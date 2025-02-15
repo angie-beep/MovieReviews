@@ -1,189 +1,158 @@
-type Query {
 
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+# Actor-Typ (als DTO)
+type ActorDTO {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    birthday: String!
+    heritage: String!
+}
+
+# Director-Typ
+type DirectorDTO {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    birthday: String!
+    heritage: String!
+}
+
+# Genre als eigener Typ
+type GenreDTO {
+    id: ID!
+    name: String!
+}
+
+# Movie-Typ (als DTO)
+type MovieDTO {
+    id: ID!
+    title: String!
+    genres: [GenreDTO!]!
+    publishingDate: String!
+    directors: [DirectorDTO!]!
+    actors: [ActorDTO!]!
+    originalLanguage: String!
+    length: Int!
+    overallRating: Float!
+}
+
+type MoviePageDTO {
+    content: [MovieDTO!]!
+    totalPages: Int!
+    totalElements: Int!
+    currentPage: Int!
+}
+# Review-Typ
+type ReviewDTO {
+    id: ID!
+    movie: MovieDTO!
+    user: UserDTO!
+    rating: Int!
+    comment: String!
+}
+
+# User-Typ
+type UserDTO {
+    id: ID!
+    username: String!
+    email: String!
+}
+
+# Watchlist-Typ
+type Watchlist {
+    id: ID!
+    user: UserDTO!
+    isPublic: Boolean!
+    movies: [MovieDTO!]!
+}
+
+# Query-Typ, der alle Abfragen abdeckt
+type Query {
+    # Allgemeine Abfrage
+    hello: String!
+
+    # Actor-Abfragen
+    getActorById(id: ID!): ActorDTO
+    getActors: [ActorDTO!]!
+
+    # Director-Abfragen
+    getDirectorById(id: ID!): DirectorDTO
+    getDirectors: [DirectorDTO!]!
+
+    # Movie-Abfragen
+    getAllMovies: [MovieDTO!]!
     getMovies(
         genre: String,
-        directorId: ID,
-        originalLanguage: String
-        page: Int
+        director: String,
+        originalLanguage: String,
+        page: Int,
         size: Int
-    ): [Movie!]!
-    getAllMovies: [Movie!]!
-    getMoviesByActor(actorId: ID!): [Movie!]!
-    getLeaderboard(genre: String): [Movie!]!
+    ): MoviePageDTO
+    getMoviesByActor(actorId: ID!): [MovieDTO!]!
+    getLeaderboard(genre: String): [MovieDTO!]!
 
-    hello: String
+    # Review-Abfragen
+    getUserReviews(userId: ID!): [ReviewDTO!]!
+    getReviewsByMovieId(movieId: ID!): [ReviewDTO!]!
 
-    getUserReviews(userId: ID!): [Review!]!
-    getReviewsByMovieId(movieId: ID!): [Review!]!
+    # User-Abfragen
+    getUserById(id: ID!): UserDTO
+    getAllUsers: [UserDTO!]!
 
-    getDirectors: [Director!]!
-    getDirectorById(id: ID!): Director
-
-    getActors: [Actor!]!
-    getActorById(id: ID!): Actor
-
-    getUserById(id: ID!): User
-    getAllUsers: [User!]!
-
+    # Watchlist-Abfragen
     getWatchlistById(id: ID!): Watchlist
     getAllWatchlists: [Watchlist!]!
     getWatchlistsByUserId(userId: ID!): [Watchlist!]!
     getPublicWatchlists: [Watchlist!]!
 }
 
-type Actor {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    birthday: String
-    heritage: String
-    movies: [Movie!]!
-}
-
-type Director {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    birthday: String
-    heritage: String
-    movies: [Movie!]!
-}
-
-
-type Genre {
-    id: ID!
-    name: String!
-    movies: [Movie!]!
-}
-
-
-type Leaderboard {
-    id: ID!
-    genre: String!
-    movies: [Movie!]!
-}
-
-
-type Movie {
-    id: ID!
-    title: String!
-    genre: Genre!
-    releaseDate: String!
-    directors: [Director!]
-    originalLanguage: String!
-    summary: String!
-    rating: Float
-    length: Int
-    reviews: [Review!]!
-    actors: [Actor!]!
-}
-
-type Review {
-    id: ID!
-    movie: Movie!
-    user: User!
-    rating: Int!
-    comment: String
-    createdAt: String!
-    updatedAt: String
-}
-
-type User {
-    id: ID!
-    name: String!
-    email: String!
-    watchlist: Watchlist
-}
-
-type Watchlist {
-    id: ID!
-    isPublic: Boolean!
-    user: User!
-    movies: [Movie!]!
-}
-
-
+# Alle Mutationen – Parameter und Rückgabetypen stimmen mit den Resolver-Methoden überein
 type Mutation {
-    addActor(
-        firstName: String!,
-        lastName: String!,
-        birthday: String,
-        heritage: String
-    ): Actor
-
-    addDirector(
-        firstName: String!,
-        lastName: String!,
-        birthday: String,
-        heritage: String
-    ): Director
-
-    createReview(
-        movieId: ID!,
-        userId: ID!,
-        rating: Int!,
-        comment: String!
-    ): Review
-    updateReview(
-        id: ID!,
-        rating: Int,
-        comment: String
-    ): Review
-
-    deleteReview(id: ID!): Boolean
-
-
-    createWatchlist(
-        userId: ID!,
-        isPublic: Boolean!
-    ): Watchlist
-    addMovieToWatchlist(
-        watchlistId: ID!,
-        movieId: ID!
-    ): Watchlist
-    removeMovieFromWatchlist(
-        watchlistId: ID!,
-        movieId: ID!
-    ): Watchlist
-    setWatchlistPublicity(
-        watchlistId: ID!,
-        isPublic: Boolean!
-    ): Watchlist
-    deleteWatchlist(id: ID!): Boolean
-
-
-    createUser(
-        name: String!,
-        email: String!
-    ): User
-    updateUser(
-        id: ID!,
-        name: String,
-        email: String
-    ): User
-    deleteUser(id: ID!): Boolean
-
+    addActor(firstName: String!, lastName: String!, birthday: String!, heritage: String!): ActorDTO!
+    addDirector(firstName: String!, lastName: String!, birthday: String!, heritage: String!): DirectorDTO!
 
     addMovie(
         title: String!,
-        genreId: ID!,
-        releaseDate: String!,
-        directorIds: [ID!],
+        genreIds: [ID!]!,
+        publishingDate: String!,
+        directorIds: [ID!]!,
+        actorIds: [ID!]!,
         originalLanguage: String!,
-        length: Int,
-        rating: Float
-    ): Movie
+        length: Int!,
+        overallRating: Float!
+    ): MovieDTO!
+
     updateMovie(
         id: ID!,
-        title: String,
-        genreId: ID,
-        releaseDate: String,
-        directorIds: [ID!],
-        originalLanguage: String,
-        length: Int,
-        rating: Float
-    ): Movie
-    deleteMovie(id: ID!): Boolean
+        title: String!,
+        genreIds: [ID!]!,
+        publishingDate: String!,
+        directorIds: [ID!]!,
+        actorIds: [ID!]!,
+        originalLanguage: String!,
+        length: Int!,
+        overallRating: Float!
+    ): MovieDTO!
+
+    deleteMovie(id: ID!): Boolean!
+
+    createReview(movieId: ID!, userId: ID!, rating: Int!, comment: String!): ReviewDTO!
+    updateReview(id: ID!, rating: Int, comment: String): ReviewDTO!
+    deleteReview(id: ID!): Boolean!
+
+    createUser(name: String!, email: String!): UserDTO!
+    updateUser(id: ID!, name: String!, email: String!): UserDTO!
+    deleteUser(id: ID!): Boolean!
+
+    createWatchlist(userId: ID!, isPublic: Boolean!): Watchlist!
+    addMovieToWatchlist(watchlistId: ID!, movieId: ID!): Watchlist!
+    removeMovieFromWatchlist(watchlistId: ID!, movieId: ID!): Watchlist!
+    setWatchlistPublicity(watchlistId: ID!, isPublic: Boolean!): Watchlist!
+    deleteWatchlist(id: ID!): Boolean!
 }
-
-

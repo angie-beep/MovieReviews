@@ -2,7 +2,7 @@ package de.moviereviews.infrastructure.api.dto;
 
 public class UserDTO {
     private Long id;
-    private String name;
+    private String username;
     private String email;
     private WatchlistDTO watchlist;
 
@@ -15,11 +15,11 @@ public class UserDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
     public String getEmail() {
         return email;
